@@ -102,7 +102,7 @@
 
 		public function auto_login_token() 
 		{
-			return $this->email . "/" . _hash($this->email . _ip() . $this->password);
+			return $this->email . "/" . _hash($this->email . $this->password);
 		}
 
 		public function logout()

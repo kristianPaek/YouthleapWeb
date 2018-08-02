@@ -21,7 +21,7 @@
 			$this->check_error($err = $user->select("email = '" . $params->email . "'"));
       $user->password = $params->password;
       $school = schoolmasterModel::get_model($user->school_id);
-			$err_login = $user->login(false);
+			$err_login = $user->login(true);
 			$db_options = array("db_host"=>DB_HOSTNAME, "db_user"=>$school->DatabaseUserName, "db_name"=>$school->DatabaseName, "db_password"=>$school->DatabasePassword, "db_port"=>DB_PORT);
 			$subuser = new subuserModel(_db_options());
 			$err = $subuser->select("youthleapuser_id = " . $user->id);

@@ -1,0 +1,121 @@
+/* Recent Works */
+.recent-work {
+    position: relative;
+    a:hover {
+        text-decoration: none;
+    }
+
+    h2 {
+        margin: 3px 0 5px;
+        a {
+            color: #3e4d5c;
+
+            &:hover {
+                color: $brand-primary;
+            }
+        }
+    }
+
+    ul {
+        list-style: none;
+        text-align: right;
+        li {
+            line-height: 1.5;
+            a {
+                color: $brand-primary;   
+                &:hover {
+                    color: #333;
+                }
+            }
+        }
+    }
+
+    .owl-buttons {
+        left: -74px;
+        right: auto;
+        top: 0;
+    }
+
+    &.right {
+        .owl-buttons {
+            right: -74px;
+            left: auto;
+        }
+    }
+
+    .recent-work-item {
+        padding-left: 10px;
+
+        a.recent-work-description {
+            padding: 10px;
+            display: block;
+            background: #fff;
+        }
+
+        strong {
+            color: #000;
+            display: block;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        b {
+            color: #656565;
+            font-weight: 300;
+        }
+
+        em {
+            display: block;
+            overflow: hidden;
+            position: relative;
+        }
+        .fa {
+            color: #fff;
+            padding: 8px 15px 8px 8px;
+            font-size: 15px;
+            position: absolute;
+            top: 50%;
+            width: 31px;
+            height: 31px;
+            margin-top: -13px;
+            border-radius: 31px;
+            background: rgba(0,0,0,0.5);
+            transition: all 0.6s ease;
+            -o-transition: all 0.6s ease;
+            -moz-transition: all 0.6s ease;
+            -webkit-transition: all 0.6s ease;  
+        }
+
+        .fa:hover {
+            color: $brand-primary;
+        }
+        .fa-link {
+            left: -100px;
+        }
+        .fa-search {
+            right: -100px;
+        }
+
+        &:hover {
+            a.recent-work-description {
+                background: $brand-primary;
+                transition: all 0.9s ease;
+                -o-transition: all 0.9s ease;
+                -moz-transition: all 0.9s ease;
+                -webkit-transition: all 0.9s ease;      
+            }
+
+            b,
+            strong {
+                color: #fff;
+            }
+
+            .fa-link {
+                left: 32%;
+            }
+            .fa-search {
+                right: 32%;
+            }
+        } 
+    }
+}

@@ -1,0 +1,16 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/data
+
+# testing
+/log
+
+# production
+/vscode
+
+/src/constants/api.constants.js
+# misc
+/sass-cache
+/tmp
+/.watch_sass.cmd

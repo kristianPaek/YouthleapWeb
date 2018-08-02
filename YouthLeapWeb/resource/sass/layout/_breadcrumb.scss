@@ -1,0 +1,40 @@
+/* breadcrumb */
+.breadcrumb {
+	background: none;
+	padding: 0 10px;
+	font: 14px $font-family-primary;
+	color: #5f6d7b;
+	margin-top: $breadcrumb-margin-top;
+	margin-bottom: $breadcrumb-margin-bottom;
+
+	> li + li:before {
+		content: "\f105 ";
+	    -moz-osx-font-smoothing: grayscale;
+	    display: inline-block;
+	    font-family: FontAwesome;
+	    font-style: normal;
+	    font-weight: normal;
+	    line-height: 1;
+	    color: #5f6d7b;
+	}
+
+	> .active {
+		color: $brand-primary;
+
+		a {
+			color: $brand-primary;
+		}
+	}
+
+	> li.right {
+		float: right;
+
+		&:before {
+			content: '';
+		}
+
+		.btn-group {
+			margin-top: -10px;
+		}
+	}
+}

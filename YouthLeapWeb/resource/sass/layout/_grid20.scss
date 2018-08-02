@@ -1,0 +1,92 @@
+$grid-20-columns: 20 !default;
+@mixin make-grid-20-columns($i: 1, $list: ".col-20-xs-#{$i}, .col-20-sm-#{$i}, .col-20-md-#{$i}, .col-20-lg-#{$i}") {
+  @for $i from (1 + 1) through $grid-20-columns {
+    $list: "#{$list}, .col-20-xs-#{$i}, .col-20-sm-#{$i}, .col-20-md-#{$i}, .col-20-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+}
+
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin float-grid-20-columns($class, $i: 1, $list: ".col-#{$class}-#{$i}") {
+  @for $i from (1 + 1) through $grid-20-columns {
+    $list: "#{$list}, .col-20-#{$class}-#{$i}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin calc-grid-20-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .col-20-#{$class}-#{$index} {
+      width: percentage(($index / $grid-20-columns));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .col-20-#{$class}-push-#{$index} {
+      left: percentage(($index / $grid-20-columns));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .col-20-#{$class}-push-0 {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .col-20-#{$class}-pull-#{$index} {
+      right: percentage(($index / $grid-20-columns));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .col-20-#{$class}-pull-0 {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .col-20-#{$class}-offset-#{$index} {
+      margin-left: percentage(($index / $grid-20-columns));
+    }
+  }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-20-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-20-column($i, $class, $type);
+  }
+}
+
+
+// Create grid for specific class
+@mixin make-grid-20($class) {
+  @include float-grid-20-columns($class);
+  @include loop-grid-20-columns($grid-20-columns, $class, width);
+  @include loop-grid-20-columns($grid-20-columns, $class, pull);
+  @include loop-grid-20-columns($grid-20-columns, $class, push);
+  @include loop-grid-20-columns($grid-20-columns, $class, offset);
+}
+
+@include make-grid-20-columns();
+
+@include make-grid-20(xs);
+
+@media (min-width: $screen-sm-min) {
+  @include make-grid-20(sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include make-grid-20(md);
+}
+
+@media (min-width: $screen-lg-min) {
+  @include make-grid-20(lg);
+}

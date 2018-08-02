@@ -1,0 +1,81 @@
+/***
+Customized Bootstrap Labels
+***/
+
+.label {
+    text-shadow: none !important;
+    font-weight: 300;  
+    font-family: $font-family-primary;   
+
+    &.label-sm {   
+        font-size: 12px;
+        padding: 0px 4px 1px 4px;  
+    }
+
+    h1 &,
+    h2 &,
+    h3 &,
+    h4 &,
+    h5 &,
+    h6 & {
+        font-size:75%;
+    }
+}
+
+/* Labels variants */
+
+
+
+/***
+Iconic labels
+***/
+
+.label.label-icon {
+    padding: 4px 0px 4px 4px;
+    margin-right: 2px;
+    text-align: center !important;
+
+    > i {
+        font-size: 12px;
+        text-align: center !important;
+    }
+
+    .ie8 &,
+    .ie9 & {
+        padding: 3px 0px 3px 3px;
+    }
+}
+
+/***
+Text states
+***/
+
+.text-default {
+    color: $brand-default;
+}
+
+.text-primary {
+    color: $brand-primary;
+}
+
+.text-success {
+    color: $brand-success;
+}
+
+.text-info {
+    color: $brand-info;
+}
+
+.text-warning {
+    color: $brand-warning;
+}
+
+.text-danger {
+    color: $brand-danger;
+}
+
+.label-default {
+    border: solid 1px #aaa;
+    color: #aaa;
+    background-color: #fff;
+}

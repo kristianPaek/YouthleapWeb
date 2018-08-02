@@ -1,0 +1,102 @@
+/***
+Pre-Footer and pre-footer elements
+***/
+.pre-footer {
+    padding: 10px;
+    padding-top: 17px;
+    padding-bottom: 0px;
+    background: #dcedc8;
+
+    a {
+        color: #333;
+    }
+
+    li {
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    address {
+        line-height: 1.7;
+        padding-left: 23px;
+    }
+
+    h2 {
+        font-size: 16px !important;
+        color: darken($brand-primary, 10%);
+        font-weight: bold;
+
+        .fa {
+            font-size: 19px;
+            vertical-align: -2px;
+        }
+        
+        .icon { 
+            font-size:16px;
+            font-weight: bold;
+            color: darken($brand-primary, 10%);
+            vertical-align: -2px;
+        }
+
+        img {
+            display: inline-block;
+            height: 16px;
+            vertical-align: -3px;
+        }
+
+        a {
+            color: darken($brand-primary, 10%);
+        }
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+    .form-control,
+    .form-control:focus {
+        border: none;
+    }
+
+    .pre-footer-col {
+        padding-bottom: 10px;
+    }
+
+    .aboutwe {
+        ul {
+            padding-left: 28px;
+        }
+    }
+
+}
+
+/* footer */
+.footer {
+    background: $brand-primary;
+    color: #fff;
+    font-size: 16px;
+    padding: 7px 10px;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .copyright {
+        padding-top: 2px;
+    }
+
+    .copyright-decl{
+        text-align: center;
+        font-size: 14px;
+        padding-top: 3px;
+    }
+
+    .youthleap-logo {
+        display: inline-block;
+        height: 20px;
+    }
+}

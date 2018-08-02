@@ -1,0 +1,36 @@
+.row.no-gutter {
+	margin-left: 0px;
+    margin-right: 0px;
+	@for $i from 1 through $grid-columns {
+		.col-lg-#{$i}, .col-md-#{$i}, .col-sm-#{$i}, .col-xs-#{$i} {
+			padding-left: 0px;
+    		padding-right: 0px;
+		}
+	}
+}
+.row-bordered {
+	border-left: solid 1px #ededed;
+	@for $i from 1 through $grid-columns {
+		.col-lg-#{$i}, .col-md-#{$i}, .col-sm-#{$i}, .col-xs-#{$i} {
+			border-right: solid 1px #ededed;
+			border-bottom: solid 1px #ededed;
+		}
+	}
+	@for $i from 1 through 20 {
+		.col-20-lg-#{$i}, .col-20-md-#{$i}, .col-20-sm-#{$i}, .col-20-xs-#{$i} {
+			padding-left: 0px;
+			padding-right: 0px;
+			border-right: solid 1px #ededed;
+			border-bottom: solid 1px #ededed;
+		}
+	}
+	@for $i from 1 through 16 {
+		.col-16-lg-#{$i}, .col-16-md-#{$i}, .col-16-sm-#{$i}, .col-16-xs-#{$i} {
+			padding-left: 0px;
+			padding-right: 0px;
+			border-right: solid 1px #ededed;
+			border-bottom: solid 1px #ededed;
+		}
+	}
+
+}

@@ -1,0 +1,25 @@
+.wrapper {
+	clear: both;
+	min-height: 100px;
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	position: relative;
+}
+.wrapper.padding50 {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+.wrapper.no-padding {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.wrapper-grey {
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+	background-color: #FCFCFC;
+	color: #888888;
+	border-top: 1px solid #E1E1E1;
+}
+.wrapper-grey h1, .wrapper-grey h2, .wrapper-grey h3 {
+	color: #444444
+}

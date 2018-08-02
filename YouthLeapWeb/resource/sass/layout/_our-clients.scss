@@ -1,0 +1,41 @@
+/* our clients */
+.our-clients {
+	position: relative;
+
+	h2 {
+		margin: 3px 0 5px;
+
+		a {
+			color: #3e4d5c;
+
+			&:hover {
+				color: $brand-primary;
+			}
+		}
+	}
+}
+
+.client-item {
+	margin-left: 2px;
+	position: relative;
+
+	img {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.color-img {
+		display: none;
+	}
+
+	&:hover {
+		img {
+			display: none;
+		}
+		.color-img {
+			display: block;
+		}
+	}
+}
+
+

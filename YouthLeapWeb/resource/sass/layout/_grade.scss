@@ -1,0 +1,67 @@
+.grade-item {
+  display: block;
+  position: relative;
+  padding: 5px;
+  border: solid 1px #c0cfc0;
+  border-radius: 6px;
+  background: white;
+  color: $brand-primary;
+  cursor: pointer;
+  
+  &.active {
+    background: $brand-primary;
+    color: white;
+    transition: all 0.3s ease-out;
+  }
+  
+  .grade-icon {
+    font-size: 50px;
+    width: 100%;    
+  }
+
+  .grade-text {
+    font-size: 20px;
+    font-weight: bolder;
+    margin-top: 10px;
+  }
+
+  &:hover {
+    border: solid 1px #c0cfc0;
+    box-shadow: 5px 5px rgba(234,234,234,0.9);
+  }
+}
+
+#class_list {
+  padding: 50px;
+  .class-item {
+    display: block;
+    position: relative;
+    padding: 5px;
+    border: solid 1px #c0cfc0;
+    border-radius: 6px;
+    background: white;
+    color: $brand-warning;
+    cursor: pointer;
+    
+    &.active {
+      background: $brand-warning;
+      color: white;
+      transition: all 0.3s ease-out;
+    }
+    
+    .class-icon {
+      font-size: 50px;
+      width: 100%;    
+    }
+  
+    .class-text {
+      font-size: 20px;
+      font-weight: bolder;
+    }
+  
+    &:hover {
+      border: solid 1px #c0cfc0;
+      box-shadow: 5px 5px rgba(234,234,234,0.9);
+    }
+  }
+}

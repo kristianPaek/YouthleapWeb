@@ -1,0 +1,92 @@
+$grid-16-columns: 16 !default;
+@mixin make-grid-16-columns($i: 1, $list: ".col-16-xs-#{$i}, .col-16-sm-#{$i}, .col-16-md-#{$i}, .col-16-lg-#{$i}") {
+  @for $i from (1 + 1) through $grid-16-columns {
+    $list: "#{$list}, .col-16-xs-#{$i}, .col-16-sm-#{$i}, .col-16-md-#{$i}, .col-16-lg-#{$i}";
+  }
+  #{$list} {
+    position: relative;
+    // Prevent columns from collapsing when empty
+    min-height: 1px;
+    // Inner gutter via padding
+    padding-left:  ($grid-gutter-width / 2);
+    padding-right: ($grid-gutter-width / 2);
+  }
+}
+
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin float-grid-16-columns($class, $i: 1, $list: ".col-#{$class}-#{$i}") {
+  @for $i from (1 + 1) through $grid-16-columns {
+    $list: "#{$list}, .col-16-#{$class}-#{$i}";
+  }
+  #{$list} {
+    float: left;
+  }
+}
+
+
+@mixin calc-grid-16-column($index, $class, $type) {
+  @if ($type == width) and ($index > 0) {
+    .col-16-#{$class}-#{$index} {
+      width: percentage(($index / $grid-16-columns));
+    }
+  }
+  @if ($type == push) and ($index > 0) {
+    .col-16-#{$class}-push-#{$index} {
+      left: percentage(($index / $grid-16-columns));
+    }
+  }
+  @if ($type == push) and ($index == 0) {
+    .col-16-#{$class}-push-0 {
+      left: auto;
+    }
+  }
+  @if ($type == pull) and ($index > 0) {
+    .col-16-#{$class}-pull-#{$index} {
+      right: percentage(($index / $grid-16-columns));
+    }
+  }
+  @if ($type == pull) and ($index == 0) {
+    .col-16-#{$class}-pull-0 {
+      right: auto;
+    }
+  }
+  @if ($type == offset) {
+    .col-16-#{$class}-offset-#{$index} {
+      margin-left: percentage(($index / $grid-16-columns));
+    }
+  }
+}
+
+// [converter] This is defined recursively in LESS, but Sass supports real loops
+@mixin loop-grid-16-columns($columns, $class, $type) {
+  @for $i from 0 through $columns {
+    @include calc-grid-16-column($i, $class, $type);
+  }
+}
+
+
+// Create grid for specific class
+@mixin make-grid-16($class) {
+  @include float-grid-16-columns($class);
+  @include loop-grid-16-columns($grid-16-columns, $class, width);
+  @include loop-grid-16-columns($grid-16-columns, $class, pull);
+  @include loop-grid-16-columns($grid-16-columns, $class, push);
+  @include loop-grid-16-columns($grid-16-columns, $class, offset);
+}
+
+@include make-grid-16-columns();
+
+@include make-grid-16(xs);
+
+@media (min-width: $screen-sm-min) {
+  @include make-grid-16(sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include make-grid-16(md);
+}
+
+@media (min-width: $screen-lg-min) {
+  @include make-grid-16(lg);
+}

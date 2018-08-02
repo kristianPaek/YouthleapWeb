@@ -1,0 +1,68 @@
+/* Facts block */
+.facts-block {
+    position: relative;
+    min-height: 410px;
+    height: auto;
+    padding: 50px 0 0;
+    z-index: 0;
+    background: #fff url(../img/facts.jpg) no-repeat fixed;
+    position: relative;
+    color: #fff;
+
+    h2 {
+        background: rgba(0,0,0,0.29);
+        padding: 14px 0 15px;
+        margin-bottom: 30px;
+        text-align: center;
+        font-family: $font-family-serif;
+        line-height: 60px;
+        font-size: 50px;
+        &:after {
+            display: none;
+        }
+    }
+
+    .item {
+        background: rgba($brand-primary,0.92);
+        font: 400 18px $font-family-default;
+        text-transform: uppercase;
+        width: 185px;
+        height: 185px;
+        border-radius: 50% !important;
+        padding: 45px 0 0; 
+        margin: 0 auto;
+        margin-bottom: 30px;
+        text-align: center;
+
+        strong {
+            display: block;
+            font-size: 70px;
+            text-transform: none;
+            margin-bottom: 4px;
+/*
+            text-shadow: 1px 1px darken($brand-primary, 10%), 
+                2px 2px darken($brand-primary, 10%), 
+                3px 3px darken($brand-primary, 10%), 
+                4px 4px darken($brand-primary, 10%), 
+                5px 5px darken($brand-primary, 10%), 
+                6px 6px darken($brand-primary, 10%), 
+                7px 7px darken($brand-primary, 10%), 
+                8px 8px darken($brand-primary, 10%), 
+                9px 9px darken($brand-primary, 10%), 
+                10px 10px darken($brand-primary, 10%);
+*/
+            small {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+@-moz-document url-prefix() { 
+    .facts-block .item {
+        padding: 31px 0 0; 
+    }
+}
+.ie8 .facts-block .item {
+    background: #e54a1a;
+}

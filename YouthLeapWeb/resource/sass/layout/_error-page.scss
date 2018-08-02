@@ -1,0 +1,43 @@
+/* 404 page */
+.page-404 {
+	.number {
+		position: relative;
+		top: 35px;
+		display: inline-block;
+		letter-spacing: -10px;
+		margin-top: 0px;
+		margin-bottom: 10px;
+		line-height: 128px;
+		font-size: 128px;
+		font-weight: 300;
+		color: $brand-primary;
+		text-align: right;
+	}
+
+	.details {
+		margin-left: 40px;
+		display: inline-block;
+		padding-top: 0px;
+		text-align: left;
+		top: 15px;
+		position: relative;
+	}
+}
+
+/* 500 page */
+.page-500 {
+	.number {  
+		display: inline-block;
+		letter-spacing: -10px;
+		line-height: 128px;
+		font-size: 128px;
+		font-weight: 300;
+		color: $brand-primary;
+		text-align: right;
+	}
+	.details {
+		margin-left: 40px;
+		display: inline-block;
+		text-align: left;
+	}
+}

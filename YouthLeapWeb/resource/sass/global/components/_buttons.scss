@@ -1,0 +1,156 @@
+/***
+Customized Bootstrap Buttons
+***/
+
+/* Default buttons */
+
+.btn {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    text-shadow: none;
+
+    &.dropdown-toggle,
+    .btn-group &.dropdown-toggle,
+    &:hover,
+    &:disabled,
+    &[disabled],
+    &:focus,
+    &:active,
+    &.active {
+     -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+     box-shadow: none;
+     text-shadow: none;
+ }
+}
+
+.btn-default {
+  border-width: 1px;
+} 
+
+.btn-block {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Bootstrap buttons */
+
+.btn-default {
+  > i {
+    color: #aaa;
+  }
+
+  > i[class^="icon-"],
+  > i[class*="icon-"] {
+    color: darken(#999, 5%);
+  } 
+}
+
+/* Small button in button group */
+
+.btn-group {
+    .input-sm {
+        .btn-default {
+            padding-top: 3px;
+            padding-bottom: 3px; 
+        }   
+    }
+}
+
+
+/* Arrow link */
+
+.btn-arrow-link {
+    vertical-align: middle;  
+    display: inline-block;
+    font-size: 13px;
+    
+    > i {
+       font-size: 14px;
+       line-height: 14px;
+       vertical-align: top;
+       margin: 2px 3px 2px 3px;
+       color: #999;
+    }
+
+    &.btn-arrow-link-lg {
+      font-size: 14px;
+
+      > i {
+         font-size: 16px;
+         line-height: 16px;
+         margin: 2px 3px 1px 3px;
+      }
+    }
+}
+
+/* Circle Buttons */
+
+.btn-circle {
+  border-radius: 25px !important;  
+}
+
+.btn-circle-right {
+  border-radius:  0 25px 25px 0 !important;
+}
+
+.btn-circle-left {
+  border-radius: 25px 0 0 25px !important;
+}
+
+.btn-circle-bottom {
+  border-radius:  0 0 25px 25px !important;
+}
+
+.btn-circle-top {
+  border-radius: 25px 25px 0 0 !important;
+}
+
+.btn-icon-only {
+  height: 34px;
+  width: 34px;
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+
+  > [class^="icon-"],
+  > i {
+    text-align: center;
+    margin-top: 2px;
+  }
+}
+
+.btn-group.btn-group-circle {
+    > .btn {
+        &:first-child {
+            border-radius: 25px 0 0 25px !important;
+        }
+
+        &:last-child {
+            border-radius: 0 25px 25px 0 !important;
+        }
+    }
+}
+
+.btn-group.btn-group-devided {
+    > .btn {
+        margin-right: 5px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.btn-group-vertical.btn-group-vertical-circle {
+     > .btn {
+        &:first-child {
+            border-radius: 25px 25px 0 0 !important;
+        }
+
+        &:last-child {
+            border-radius: 0 0 25px 25px !important;
+        }
+    }
+}

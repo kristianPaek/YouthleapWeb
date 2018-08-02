@@ -1,0 +1,39 @@
+/* Blockquote Box */
+.quote-v1 {
+  background: #7C858E;
+  padding: 10px 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.quote-v1 a {
+  margin: 5px;
+  display: inline-block;
+}
+.quote-v1 span {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 300;
+  margin: 13px 5px 8px;
+  line-height: 26px;
+  display: inline-block;
+}
+.quote-v1 a.btn-transparent {
+  color: #fff;
+  font-size: 16px;
+  padding: 8px 18px;
+  white-space: nowrap;   
+  text-decoration: none;
+  border: solid 1px #fff;
+  background: none;
+}
+.quote-v1 a.btn-transparent:hover {
+  background: $brand-primary;
+  color: #fff;
+  transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;      
+}
+.quote-v1 a.btn-transparent i {
+	margin-right: 10px;
+}

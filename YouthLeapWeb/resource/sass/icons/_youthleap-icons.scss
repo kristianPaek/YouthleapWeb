@@ -1,0 +1,686 @@
+// Default Variables
+$youthleap-icon-font-path      : "../fonts/";
+$youthleap-icon-font-family    : "youthleap-icons";
+$youthleap-icon-prefix      	: icon-;
+
+@font-face {
+	font-family: '#{$youthleap-icon-font-family}';
+	src:url('#{$youthleap-icon-font-path}youthleap-icons.eot');
+	src:url('#{$youthleap-icon-font-path}youthleap-icons.eot?#iefix') format('embedded-opentype'),
+		url('#{$youthleap-icon-font-path}youthleap-icons.woff') format('woff'),
+		url('#{$youthleap-icon-font-path}youthleap-icons.ttf') format('truetype'),
+		url('#{$youthleap-icon-font-path}youthleap-icons.svg#youthleap_icons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'hc_icons';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.#{$youthleap-icon-prefix}user-female,
+.#{$youthleap-icon-prefix}user-follow,
+.#{$youthleap-icon-prefix}user-following,
+.#{$youthleap-icon-prefix}user-unfollow,
+.#{$youthleap-icon-prefix}trophy,
+.#{$youthleap-icon-prefix}screen-smartphone,
+.#{$youthleap-icon-prefix}screen-desktop,
+.#{$youthleap-icon-prefix}plane,
+.#{$youthleap-icon-prefix}notebook,
+.#{$youthleap-icon-prefix}moustache,
+.#{$youthleap-icon-prefix}mouse,
+.#{$youthleap-icon-prefix}magnet,
+.#{$youthleap-icon-prefix}energy,
+.#{$youthleap-icon-prefix}emoticon-smile,
+.#{$youthleap-icon-prefix}disc,
+.#{$youthleap-icon-prefix}cursor-move,
+.#{$youthleap-icon-prefix}crop,
+.#{$youthleap-icon-prefix}credit-card,
+.#{$youthleap-icon-prefix}chemistry,
+.#{$youthleap-icon-prefix}user,
+.#{$youthleap-icon-prefix}speedometer,
+.#{$youthleap-icon-prefix}social-youtube,
+.#{$youthleap-icon-prefix}social-twitter,
+.#{$youthleap-icon-prefix}social-tumblr,
+.#{$youthleap-icon-prefix}social-facebook,
+.#{$youthleap-icon-prefix}social-dropbox,
+.#{$youthleap-icon-prefix}social-dribbble,
+.#{$youthleap-icon-prefix}shield,
+.#{$youthleap-icon-prefix}screen-tablet,
+.#{$youthleap-icon-prefix}magic-wand,
+.#{$youthleap-icon-prefix}hourglass,
+.#{$youthleap-icon-prefix}graduation,
+.#{$youthleap-icon-prefix}ghost,
+.#{$youthleap-icon-prefix}game-controller,
+.#{$youthleap-icon-prefix}fire,
+.#{$youthleap-icon-prefix}eyeglasses,
+.#{$youthleap-icon-prefix}envelope-open,
+.#{$youthleap-icon-prefix}envelope-letter,
+.#{$youthleap-icon-prefix}bell,
+.#{$youthleap-icon-prefix}badge,
+.#{$youthleap-icon-prefix}anchor,
+.#{$youthleap-icon-prefix}wallet,
+.#{$youthleap-icon-prefix}vector,
+.#{$youthleap-icon-prefix}speech,
+.#{$youthleap-icon-prefix}puzzle,
+.#{$youthleap-icon-prefix}printer,
+.#{$youthleap-icon-prefix}present,
+.#{$youthleap-icon-prefix}playlist,
+.#{$youthleap-icon-prefix}pin,
+.#{$youthleap-icon-prefix}picture,
+.#{$youthleap-icon-prefix}map,
+.#{$youthleap-icon-prefix}layers,
+.#{$youthleap-icon-prefix}handbag,
+.#{$youthleap-icon-prefix}globe-alt,
+.#{$youthleap-icon-prefix}globe,
+.#{$youthleap-icon-prefix}frame,
+.#{$youthleap-icon-prefix}folder-alt,
+.#{$youthleap-icon-prefix}film,
+.#{$youthleap-icon-prefix}feed,
+.#{$youthleap-icon-prefix}earphones-alt,
+.#{$youthleap-icon-prefix}earphones,
+.#{$youthleap-icon-prefix}drop,
+.#{$youthleap-icon-prefix}drawer,
+.#{$youthleap-icon-prefix}docs,
+.#{$youthleap-icon-prefix}directions,
+.#{$youthleap-icon-prefix}direction,
+.#{$youthleap-icon-prefix}diamond,
+.#{$youthleap-icon-prefix}cup,
+.#{$youthleap-icon-prefix}compass,
+.#{$youthleap-icon-prefix}call-out,
+.#{$youthleap-icon-prefix}call-in,
+.#{$youthleap-icon-prefix}call-end,
+.#{$youthleap-icon-prefix}calculator,
+.#{$youthleap-icon-prefix}bubbles,
+.#{$youthleap-icon-prefix}briefcase,
+.#{$youthleap-icon-prefix}book-open,
+.#{$youthleap-icon-prefix}basket-loaded,
+.#{$youthleap-icon-prefix}basket,
+.#{$youthleap-icon-prefix}bag,
+.#{$youthleap-icon-prefix}action-undo,
+.#{$youthleap-icon-prefix}action-redo,
+.#{$youthleap-icon-prefix}wrench,
+.#{$youthleap-icon-prefix}umbrella,
+.#{$youthleap-icon-prefix}trash,
+.#{$youthleap-icon-prefix}tag,
+.#{$youthleap-icon-prefix}support,
+.#{$youthleap-icon-prefix}size-fullscreen,
+.#{$youthleap-icon-prefix}size-actual,
+.#{$youthleap-icon-prefix}shuffle,
+.#{$youthleap-icon-prefix}share-alt,
+.#{$youthleap-icon-prefix}share,
+.#{$youthleap-icon-prefix}rocket,
+.#{$youthleap-icon-prefix}question,
+.#{$youthleap-icon-prefix}pie-chart,
+.#{$youthleap-icon-prefix}pencil,
+.#{$youthleap-icon-prefix}note,
+.#{$youthleap-icon-prefix}music-tone-alt,
+.#{$youthleap-icon-prefix}music-tone,
+.#{$youthleap-icon-prefix}microphone,
+.#{$youthleap-icon-prefix}loop,
+.#{$youthleap-icon-prefix}logout,
+.#{$youthleap-icon-prefix}login,
+.#{$youthleap-icon-prefix}list,
+.#{$youthleap-icon-prefix}like,
+.#{$youthleap-icon-prefix}home,
+.#{$youthleap-icon-prefix}grid,
+.#{$youthleap-icon-prefix}graph,
+.#{$youthleap-icon-prefix}equalizer,
+.#{$youthleap-icon-prefix}dislike,
+.#{$youthleap-icon-prefix}cursor,
+.#{$youthleap-icon-prefix}control-start,
+.#{$youthleap-icon-prefix}control-rewind,
+.#{$youthleap-icon-prefix}control-play,
+.#{$youthleap-icon-prefix}control-pause,
+.#{$youthleap-icon-prefix}control-forward,
+.#{$youthleap-icon-prefix}control-end,
+.#{$youthleap-icon-prefix}calendar,
+.#{$youthleap-icon-prefix}bulb,
+.#{$youthleap-icon-prefix}bar-chart,
+.#{$youthleap-icon-prefix}arrow-up,
+.#{$youthleap-icon-prefix}arrow-right,
+.#{$youthleap-icon-prefix}arrow-left,
+.#{$youthleap-icon-prefix}arrow-down,
+.#{$youthleap-icon-prefix}ban,
+.#{$youthleap-icon-prefix}bubble,
+.#{$youthleap-icon-prefix}camcorder,
+.#{$youthleap-icon-prefix}camera,
+.#{$youthleap-icon-prefix}check,
+.#{$youthleap-icon-prefix}clock,
+.#{$youthleap-icon-prefix}close,
+.#{$youthleap-icon-prefix}cloud-download,
+.#{$youthleap-icon-prefix}cloud-upload,
+.#{$youthleap-icon-prefix}doc,
+.#{$youthleap-icon-prefix}envelope,
+.#{$youthleap-icon-prefix}eye,
+.#{$youthleap-icon-prefix}flag,
+.#{$youthleap-icon-prefix}folder,
+.#{$youthleap-icon-prefix}heart,
+.#{$youthleap-icon-prefix}info,
+.#{$youthleap-icon-prefix}key,
+.#{$youthleap-icon-prefix}link,
+.#{$youthleap-icon-prefix}lock,
+.#{$youthleap-icon-prefix}lock-open,
+.#{$youthleap-icon-prefix}magnifier,
+.#{$youthleap-icon-prefix}magnifier-add,
+.#{$youthleap-icon-prefix}magnifier-remove,
+.#{$youthleap-icon-prefix}paper-clip,
+.#{$youthleap-icon-prefix}paper-plane,
+.#{$youthleap-icon-prefix}plus,
+.#{$youthleap-icon-prefix}pointer,
+.#{$youthleap-icon-prefix}power,
+.#{$youthleap-icon-prefix}refresh,
+.#{$youthleap-icon-prefix}reload,
+.#{$youthleap-icon-prefix}settings,
+.#{$youthleap-icon-prefix}star,
+.#{$youthleap-icon-prefix}symbol-female,
+.#{$youthleap-icon-prefix}symbol-male,
+.#{$youthleap-icon-prefix}target,
+.#{$youthleap-icon-prefix}volume-1,
+.#{$youthleap-icon-prefix}volume-2,
+.#{$youthleap-icon-prefix}volume-off, 
+.#{$youthleap-icon-prefix}users {
+	font-family: '#{$youthleap-icon-font-family}';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.#{$youthleap-icon-prefix}user-female:before {
+	content: "\e000";
+}
+.#{$youthleap-icon-prefix}user-follow:before {
+	content: "\e002";
+}
+.#{$youthleap-icon-prefix}user-following:before {
+	content: "\e003";
+}
+.#{$youthleap-icon-prefix}user-unfollow:before {
+	content: "\e004";
+}
+.#{$youthleap-icon-prefix}trophy:before {
+	content: "\e006";
+}
+.#{$youthleap-icon-prefix}screen-smartphone:before {
+	content: "\e010";
+}
+.#{$youthleap-icon-prefix}screen-desktop:before {
+	content: "\e011";
+}
+.#{$youthleap-icon-prefix}plane:before {
+	content: "\e012";
+}
+.#{$youthleap-icon-prefix}notebook:before {
+	content: "\e013";
+}
+.#{$youthleap-icon-prefix}moustache:before {
+	content: "\e014";
+}
+.#{$youthleap-icon-prefix}mouse:before {
+	content: "\e015";
+}
+.#{$youthleap-icon-prefix}magnet:before {
+	content: "\e016";
+}
+.#{$youthleap-icon-prefix}energy:before {
+	content: "\e020";
+}
+.#{$youthleap-icon-prefix}emoticon-smile:before {
+	content: "\e021";
+}
+.#{$youthleap-icon-prefix}disc:before {
+	content: "\e022";
+}
+.#{$youthleap-icon-prefix}cursor-move:before {
+	content: "\e023";
+}
+.#{$youthleap-icon-prefix}crop:before {
+	content: "\e024";
+}
+.#{$youthleap-icon-prefix}credit-card:before {
+	content: "\e025";
+}
+.#{$youthleap-icon-prefix}chemistry:before {
+	content: "\e026";
+}
+.#{$youthleap-icon-prefix}user:before {
+	content: "\e005";
+}
+.#{$youthleap-icon-prefix}speedometer:before {
+	content: "\e007";
+}
+.#{$youthleap-icon-prefix}social-youtube:before {
+	content: "\e008";
+}
+.#{$youthleap-icon-prefix}social-twitter:before {
+	content: "\e009";
+}
+.#{$youthleap-icon-prefix}social-tumblr:before {
+	content: "\e00a";
+}
+.#{$youthleap-icon-prefix}social-facebook:before {
+	content: "\e00b";
+}
+.#{$youthleap-icon-prefix}social-dropbox:before {
+	content: "\e00c";
+}
+.#{$youthleap-icon-prefix}social-dribbble:before {
+	content: "\e00d";
+}
+.#{$youthleap-icon-prefix}shield:before {
+	content: "\e00e";
+}
+.#{$youthleap-icon-prefix}screen-tablet:before {
+	content: "\e00f";
+}
+.#{$youthleap-icon-prefix}magic-wand:before {
+	content: "\e017";
+}
+.#{$youthleap-icon-prefix}hourglass:before {
+	content: "\e018";
+}
+.#{$youthleap-icon-prefix}graduation:before {
+	content: "\e019";
+}
+.#{$youthleap-icon-prefix}ghost:before {
+	content: "\e01a";
+}
+.#{$youthleap-icon-prefix}game-controller:before {
+	content: "\e01b";
+}
+.#{$youthleap-icon-prefix}fire:before {
+	content: "\e01c";
+}
+.#{$youthleap-icon-prefix}eyeglasses:before {
+	content: "\e01d";
+}
+.#{$youthleap-icon-prefix}envelope-open:before {
+	content: "\e01e";
+}
+.#{$youthleap-icon-prefix}envelope-letter:before {
+	content: "\e01f";
+}
+.#{$youthleap-icon-prefix}bell:before {
+	content: "\e027";
+}
+.#{$youthleap-icon-prefix}badge:before {
+	content: "\e028";
+}
+.#{$youthleap-icon-prefix}anchor:before {
+	content: "\e029";
+}
+.#{$youthleap-icon-prefix}wallet:before {
+	content: "\e02a";
+}
+.#{$youthleap-icon-prefix}vector:before {
+	content: "\e02b";
+}
+.#{$youthleap-icon-prefix}speech:before {
+	content: "\e02c";
+}
+.#{$youthleap-icon-prefix}puzzle:before {
+	content: "\e02d";
+}
+.#{$youthleap-icon-prefix}printer:before {
+	content: "\e02e";
+}
+.#{$youthleap-icon-prefix}present:before {
+	content: "\e02f";
+}
+.#{$youthleap-icon-prefix}playlist:before {
+	content: "\e030";
+}
+.#{$youthleap-icon-prefix}pin:before {
+	content: "\e031";
+}
+.#{$youthleap-icon-prefix}picture:before {
+	content: "\e032";
+}
+.#{$youthleap-icon-prefix}map:before {
+	content: "\e033";
+}
+.#{$youthleap-icon-prefix}layers:before {
+	content: "\e034";
+}
+.#{$youthleap-icon-prefix}handbag:before {
+	content: "\e035";
+}
+.#{$youthleap-icon-prefix}globe-alt:before {
+	content: "\e036";
+}
+.#{$youthleap-icon-prefix}globe:before {
+	content: "\e037";
+}
+.#{$youthleap-icon-prefix}frame:before {
+	content: "\e038";
+}
+.#{$youthleap-icon-prefix}folder-alt:before {
+	content: "\e039";
+}
+.#{$youthleap-icon-prefix}film:before {
+	content: "\e03a";
+}
+.#{$youthleap-icon-prefix}feed:before {
+	content: "\e03b";
+}
+.#{$youthleap-icon-prefix}earphones-alt:before {
+	content: "\e03c";
+}
+.#{$youthleap-icon-prefix}earphones:before {
+	content: "\e03d";
+}
+.#{$youthleap-icon-prefix}drop:before {
+	content: "\e03e";
+}
+.#{$youthleap-icon-prefix}drawer:before {
+	content: "\e03f";
+}
+.#{$youthleap-icon-prefix}docs:before {
+	content: "\e040";
+}
+.#{$youthleap-icon-prefix}directions:before {
+	content: "\e041";
+}
+.#{$youthleap-icon-prefix}direction:before {
+	content: "\e042";
+}
+.#{$youthleap-icon-prefix}diamond:before {
+	content: "\e043";
+}
+.#{$youthleap-icon-prefix}cup:before {
+	content: "\e044";
+}
+.#{$youthleap-icon-prefix}compass:before {
+	content: "\e045";
+}
+.#{$youthleap-icon-prefix}call-out:before {
+	content: "\e046";
+}
+.#{$youthleap-icon-prefix}call-in:before {
+	content: "\e047";
+}
+.#{$youthleap-icon-prefix}call-end:before {
+	content: "\e048";
+}
+.#{$youthleap-icon-prefix}calculator:before {
+	content: "\e049";
+}
+.#{$youthleap-icon-prefix}bubbles:before {
+	content: "\e04a";
+}
+.#{$youthleap-icon-prefix}briefcase:before {
+	content: "\e04b";
+}
+.#{$youthleap-icon-prefix}book-open:before {
+	content: "\e04c";
+}
+.#{$youthleap-icon-prefix}basket-loaded:before {
+	content: "\e04d";
+}
+.#{$youthleap-icon-prefix}basket:before {
+	content: "\e04e";
+}
+.#{$youthleap-icon-prefix}bag:before {
+	content: "\e04f";
+}
+.#{$youthleap-icon-prefix}action-undo:before {
+	content: "\e050";
+}
+.#{$youthleap-icon-prefix}action-redo:before {
+	content: "\e051";
+}
+.#{$youthleap-icon-prefix}wrench:before {
+	content: "\e052";
+}
+.#{$youthleap-icon-prefix}umbrella:before {
+	content: "\e053";
+}
+.#{$youthleap-icon-prefix}trash:before {
+	content: "\e054";
+}
+.#{$youthleap-icon-prefix}tag:before {
+	content: "\e055";
+}
+.#{$youthleap-icon-prefix}support:before {
+	content: "\e056";
+}
+.#{$youthleap-icon-prefix}size-fullscreen:before {
+	content: "\e057";
+}
+.#{$youthleap-icon-prefix}size-actual:before {
+	content: "\e058";
+}
+.#{$youthleap-icon-prefix}shuffle:before {
+	content: "\e059";
+}
+.#{$youthleap-icon-prefix}share-alt:before {
+	content: "\e05a";
+}
+.#{$youthleap-icon-prefix}share:before {
+	content: "\e05b";
+}
+.#{$youthleap-icon-prefix}rocket:before {
+	content: "\e05c";
+}
+.#{$youthleap-icon-prefix}question:before {
+	content: "\e05d";
+}
+.#{$youthleap-icon-prefix}pie-chart:before {
+	content: "\e05e";
+}
+.#{$youthleap-icon-prefix}pencil:before {
+	content: "\e05f";
+}
+.#{$youthleap-icon-prefix}note:before {
+	content: "\e060";
+}
+.#{$youthleap-icon-prefix}music-tone-alt:before {
+	content: "\e061";
+}
+.#{$youthleap-icon-prefix}music-tone:before {
+	content: "\e062";
+}
+.#{$youthleap-icon-prefix}microphone:before {
+	content: "\e063";
+}
+.#{$youthleap-icon-prefix}loop:before {
+	content: "\e064";
+}
+.#{$youthleap-icon-prefix}logout:before {
+	content: "\e065";
+}
+.#{$youthleap-icon-prefix}login:before {
+	content: "\e066";
+}
+.#{$youthleap-icon-prefix}list:before {
+	content: "\e067";
+}
+.#{$youthleap-icon-prefix}like:before {
+	content: "\e068";
+}
+.#{$youthleap-icon-prefix}home:before {
+	content: "\e069";
+}
+.#{$youthleap-icon-prefix}grid:before {
+	content: "\e06a";
+}
+.#{$youthleap-icon-prefix}graph:before {
+	content: "\e06b";
+}
+.#{$youthleap-icon-prefix}equalizer:before {
+	content: "\e06c";
+}
+.#{$youthleap-icon-prefix}dislike:before {
+	content: "\e06d";
+}
+.#{$youthleap-icon-prefix}cursor:before {
+	content: "\e06e";
+}
+.#{$youthleap-icon-prefix}control-start:before {
+	content: "\e06f";
+}
+.#{$youthleap-icon-prefix}control-rewind:before {
+	content: "\e070";
+}
+.#{$youthleap-icon-prefix}control-play:before {
+	content: "\e071";
+}
+.#{$youthleap-icon-prefix}control-pause:before {
+	content: "\e072";
+}
+.#{$youthleap-icon-prefix}control-forward:before {
+	content: "\e073";
+}
+.#{$youthleap-icon-prefix}control-end:before {
+	content: "\e074";
+}
+.#{$youthleap-icon-prefix}calendar:before {
+	content: "\e075";
+}
+.#{$youthleap-icon-prefix}bulb:before {
+	content: "\e076";
+}
+.#{$youthleap-icon-prefix}bar-chart:before {
+	content: "\e077";
+}
+.#{$youthleap-icon-prefix}arrow-up:before {
+	content: "\e078";
+}
+.#{$youthleap-icon-prefix}arrow-right:before {
+	content: "\e079";
+}
+.#{$youthleap-icon-prefix}arrow-left:before {
+	content: "\e07a";
+}
+.#{$youthleap-icon-prefix}arrow-down:before {
+	content: "\e07b";
+}
+.#{$youthleap-icon-prefix}ban:before {
+	content: "\e07c";
+}
+.#{$youthleap-icon-prefix}bubble:before {
+	content: "\e07d";
+}
+.#{$youthleap-icon-prefix}camcorder:before {
+	content: "\e07e";
+}
+.#{$youthleap-icon-prefix}camera:before {
+	content: "\e07f";
+}
+.#{$youthleap-icon-prefix}check:before {
+	content: "\e080";
+}
+.#{$youthleap-icon-prefix}clock:before {
+	content: "\e081";
+}
+.#{$youthleap-icon-prefix}close:before {
+	content: "\e082";
+}
+.#{$youthleap-icon-prefix}cloud-download:before {
+	content: "\e083";
+}
+.#{$youthleap-icon-prefix}cloud-upload:before {
+	content: "\e084";
+}
+.#{$youthleap-icon-prefix}doc:before {
+	content: "\e085";
+}
+.#{$youthleap-icon-prefix}envelope:before {
+	content: "\e086";
+}
+.#{$youthleap-icon-prefix}eye:before {
+	content: "\e087";
+}
+.#{$youthleap-icon-prefix}flag:before {
+	content: "\e088";
+}
+.#{$youthleap-icon-prefix}folder:before {
+	content: "\e089";
+}
+.#{$youthleap-icon-prefix}heart:before {
+	content: "\e08a";
+}
+.#{$youthleap-icon-prefix}info:before {
+	content: "\e08b";
+}
+.#{$youthleap-icon-prefix}key:before {
+	content: "\e08c";
+}
+.#{$youthleap-icon-prefix}link:before {
+	content: "\e08d";
+}
+.#{$youthleap-icon-prefix}lock:before {
+	content: "\e08e";
+}
+.#{$youthleap-icon-prefix}lock-open:before {
+	content: "\e08f";
+}
+.#{$youthleap-icon-prefix}magnifier:before {
+	content: "\e090";
+}
+.#{$youthleap-icon-prefix}magnifier-add:before {
+	content: "\e091";
+}
+.#{$youthleap-icon-prefix}magnifier-remove:before {
+	content: "\e092";
+}
+.#{$youthleap-icon-prefix}paper-clip:before {
+	content: "\e093";
+}
+.#{$youthleap-icon-prefix}paper-plane:before {
+	content: "\e094";
+}
+.#{$youthleap-icon-prefix}plus:before {
+	content: "\e095";
+}
+.#{$youthleap-icon-prefix}pointer:before {
+	content: "\e096";
+}
+.#{$youthleap-icon-prefix}power:before {
+	content: "\e097";
+}
+.#{$youthleap-icon-prefix}refresh:before {
+	content: "\e098";
+}
+.#{$youthleap-icon-prefix}reload:before {
+	content: "\e099";
+}
+.#{$youthleap-icon-prefix}settings:before {
+	content: "\e09a";
+}
+.#{$youthleap-icon-prefix}star:before {
+	content: "\e09b";
+}
+.#{$youthleap-icon-prefix}symbol-female:before {
+	content: "\e09c";
+}
+.#{$youthleap-icon-prefix}symbol-male:before {
+	content: "\e09d";
+}
+.#{$youthleap-icon-prefix}target:before {
+	content: "\e09e";
+}
+.#{$youthleap-icon-prefix}volume-1:before {
+	content: "\e09f";
+}
+.#{$youthleap-icon-prefix}volume-2:before {
+	content: "\e0a0";
+}
+.#{$youthleap-icon-prefix}volume-off:before {
+	content: "\e0a1";
+}
+.#{$youthleap-icon-prefix}users:before {
+	content: "\e001";
+}

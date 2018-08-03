@@ -3,7 +3,8 @@ $(function () {
 	confirmPasswordBox("Confirm Password", "You have to confirm current password to update your password. Please enter current password.", 
 		function(password) {
 			params = {
-				password: password
+				password: password,
+				user_token: "<?php p(_token());?>"
 			};
             App.callAPI("api/profile/check_password", params).done(function(res) {
 				$('[name="old_password"]').val(password);

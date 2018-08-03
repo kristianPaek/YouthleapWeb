@@ -6,6 +6,7 @@
 
 	<h3>Profile </h3>
 	<form id="myinfo_form" action="api/profile/save" class="horizontal-form" method="post" novalidate="novalidate">
+		<input type="hidden" id="user_token" name="user_token" value="<?php p(_token()); ?>" />
 		<div class="row margin-bottom-20">
 			<div class="col-md-3 col-sm-3">
 				<ul class="nav nav-tabs tabs-left">

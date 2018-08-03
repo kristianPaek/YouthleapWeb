@@ -55,6 +55,7 @@
 	define('ERR_INQUIRY_ALREADY_DISLIKE',       '72');
 
 	define('ERR_INVALID_CERT',					'1001');
+	define('ERR_INVALID_TOKEN',									'73');
 
 	define('CODE_UTYPE',                        0);
 	define('CODE_SEX',                          1);

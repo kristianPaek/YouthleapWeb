@@ -52,11 +52,13 @@ $(function () {
   $('.btn-active').click(function() {
       var tutor_id = "<?php p($mTutor->id); ?>";
       var tutor_name = "<?php p($mTutor->first_name . " " . $mTutor->last_name); ?>";
+			var user_token = "<?php p(_token());?>";
       confirmBox("Tutor Active", "Do you want to active "+tutor_name+"?", function(note) {
         App.callAPI("api/tutor/active",
           {
             tutor_id: tutor_id,
             is_active: 1,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Tutor Active", tutor_name+" actived successfully", function() {
@@ -72,11 +74,13 @@ $(function () {
   $('.btn-inactive').click(function() {
       var tutor_id = "<?php p($mTutor->id); ?>";
       var tutor_name = "<?php p($mTutor->first_name . " " . $mTutor->last_name); ?>";
+			var user_token = "<?php p(_token());?>";
       confirmBox("Tutor Inactive", "Do you want to inactive "+tutor_name+"?", function(note) {
         App.callAPI("api/tutor/active",
           {
             tutor_id: tutor_id,
             is_active: 0,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Tutor Inactive", tutor_name+" inactived successfully", function() {
@@ -92,10 +96,12 @@ $(function () {
   $('.btn-remove').click(function() {
       var tutor_id = "<?php p($mTutor->id); ?>";
       var tutor_name = "<?php p($mTutor->first_name . " " . $mTutor->last_name); ?>";
+			var user_token = "<?php p(_token());?>";
       confirmBox("Tutor Remove", "Do you want to remove "+tutor_name+"?", function(note) {
         App.callAPI("api/tutor/remove",
           {
-            tutor_id: tutor_id
+            tutor_id: tutor_id,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Tutor Remove", tutor_name+" removed successfully", function() {

@@ -76,11 +76,12 @@
 				_db_options($db_options);
 				$subuser = new subuserModel($db_options);
 				$err = $subuser->select("youthleapuser_id = " . $user->id);
+				sessionModel::insert_session();
+	
+				logAccessModel::login();
 				userModel::init_session_data($subuser);
 
 				$this->load($user);
-
-				_access_log("signup");
 			}
 
 			return $logined;
@@ -95,9 +96,6 @@
 			_user_middlename($user->middle_name);
 			_user_lastname($user->last_name);
 			_user_image($user->user_image);
-			sessionModel::insert_session();
-
-			logAccessModel::login();
 		}
 
 		public function auto_login_token() 
@@ -111,59 +109,5 @@
 			_access_log("logout");
 			_session();
 			_auto_login_token("NOAUTO");
-		}
-
-		public static function get_user_name($user_id)
-		{
-			if ($user_id == null)
-				return "";
-
-			global $g_users;
-			if ($g_users == null)
-				$g_users = array();
-
-			if (isset($g_users[$user_id]))
-				return $g_users[$user_id]["user_name"];
-
-			$user = userModel::get_model($user_id);
-			if ($user == null)
-				return "";
-			else {
-				$g_users[$user_id] = $user->props;
-				return $user->user_name;
-			}
-		}
-
-		public static function get_login_id($user_id)
-		{
-			if ($user_id == null)
-				return "";
-
-			global $g_users;
-			if ($g_users == null)
-				$g_users = array();
-
-			if (isset($g_users[$user_id]))
-				return $g_users[$user_id]["login_id"];
-
-			$user = userModel::get_model($user_id);
-			if ($user == null)
-				return "";
-			else {
-				$g_users[$user_id] = $user->props;
-				return $user->login_id;
-			}
-		}
-
-		static public function is_exist_by_loginid($login_id, $user_id=null)
-		{
-			$user = new userModel;
-			$where = "login_id=" . _sql($login_id);
-			if (!_is_empty($user_id))
-			{
-				$where .= " AND user_id!=" . _sql($user_id);
-			}
-			$err = $user->select($where);
-			return $err == ERR_OK;
 		}
 	};

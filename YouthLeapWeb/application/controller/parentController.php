@@ -63,18 +63,23 @@
 
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email",
-		"city", "address", "students", "avatar_url");
+		"city", "address", "students", "avatar_url", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("first_name", "gender", "dob"));
+			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			$user = new userModel();
 			if ($params->youthleapuser_id != null) {
 				$user->select("id = " . $params->youthleapuser_id);
 			}
 			$user->email = $params->email;
-			$user->school_id = _school_id();
+			$user->school_id = _school()->ID;
 			$user->user_type = UTYPE_PARENT;
 			$user->is_active = 1;
 			if ($user->password == null) {
@@ -108,9 +113,9 @@
 		}
 
 		public function get_parents_ajax() {
-			$param_names = array("psort", "page", "size");
+			$param_names = array("psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
@@ -118,9 +123,12 @@
 			$size = $params->size == null ? 10 : $params->size;
 
 			$this->psort = $psort;
-
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+			}
+			$db_options = _db_options();
 			$parents = array();
-			$parent = new subuserModel(_db_options());
+			$parent = new subuserModel($db_options);
 			
 			$this->where = "p.del_flag=0 AND p.user_type = " . UTYPE_PARENT;
 
@@ -145,27 +153,17 @@
 			$this->finish(array("parents"=>$parents), ERR_OK);
 		}
 
-		public function get_parent_ajax() {
-			$param_names = array("parnet_id");
-			$this->set_api_params($param_names);
-			$this->check_required(array());
-			$params = $this->api_params;
-			$this->start();
-
-			$parnet_id = $params->parnet_id;
-			$parent = new subuserModel(_db_options());
-			$err = $parent->select("id=".$parnet_id . " AND user_type = " . UTYPE_parent);
-			$students = subparentstudentModel::get_students($parnet_id, false);
-			$this->finish(array("parent"=>$parent->props(), "students"=>$students), ERR_OK);
-		}
-
 		public function remove_ajax() {
-			$param_names = array("parent_id");
+			$param_names = array("parent_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("parent_id"));
+			$this->check_required(array("parent_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
 			
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 			$db_options = _db_options();
 			$parent = new subuserModel($db_options);
 			$err = $parent->select("id = " . $params->parent_id);
@@ -183,11 +181,16 @@
 		}
 
 		public function active_ajax() {
-			$param_names = array("parent_id", "is_active");
+			$param_names = array("parent_id", "is_active", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("parent_id", "is_active"));
+			$this->check_required(array("parent_id", "is_active", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			$db_options = _db_options();
 			$parent = new subuserModel($db_options);
@@ -206,20 +209,7 @@
 			}
 			$this->finish(null, $err);			
 		}
-
-		public function access_ajax($first_access = 1) {
-			set_time_limit(30);
-
-			$user_id = _user_id();
-			$utype = _utype();
-
-			if ($user_id != "") {
-				logAccessModel::last_access();
-			}
-
-			$this->finish(array("sys_time" => _datetime(null, "Y-m-d H:i")), ERR_OK);
-		}
-
+		
 		private function loadsearch($session_name) {
 			$this->search = new reqsession($session_name);
 

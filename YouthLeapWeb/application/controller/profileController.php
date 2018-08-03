@@ -43,10 +43,17 @@
 		}
 
 		public function save_ajax() {
-			$param_names = array("gender", "dob", "school_name", "first_name", "middle_name", "last_name", "state", "city", "address", "pincode", "email", "mobile_no", "NFCTag");
+			$param_names = array("gender", "dob", "school_name", "first_name", "middle_name", "last_name", "state", "city", "address", 
+			"pincode", "email", "mobile_no", "NFCTag", "user_token");
 			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			$me = _user();
 			if ($me == null)
@@ -70,11 +77,16 @@
 		}
 
 		public function password_ajax() {
-			$param_names = array("user_id", "old_password", "new_password");
+			$param_names = array("user_id", "old_password", "new_password", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required($param_names);
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			if ($user_id == null) {
 				$me = _user();
@@ -97,11 +109,16 @@
 		}
 
 		public function check_password_ajax() {
-			$param_names = array("password");
+			$param_names = array("password", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required($param_names);
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			$me = _user();
 			if ($me == null)

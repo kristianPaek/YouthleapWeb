@@ -47,7 +47,8 @@
 
 		ERR_UPLOAD_ZEROFILE => 'Cannot upload 0Byte File.',
 
-		ERR_INVALID_CERT => 'Invalid Cert.'
+		ERR_INVALID_CERT => 'Invalid Cert.',
+		ERR_INVALID_TOKEN=> 'Invalid Token'
 	);
 
 	$g_codes = array(

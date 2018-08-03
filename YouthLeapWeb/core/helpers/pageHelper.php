@@ -79,7 +79,7 @@
 		                foreach ($this->sizes as $size) {
 		                ?>
 			            	<li>
-			                    <a href="<?php p($base_url . "/" . $size . $query_string); ?>"><?php p($size); ?></a>
+			                    <a href="<?php p($base_url . 0 . "/" . $size . $query_string); ?>"><?php p($size); ?></a>
 							</li>
 		                <?php
 		                }

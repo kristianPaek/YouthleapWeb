@@ -45,7 +45,7 @@
 				LEFT JOIN mt_studentclass tc ON p.id=tc.student_id
 				LEFT JOIN mt_class c ON tc.class_id=c.class_id";
 
-			$this->counts = $student->scalar("SELECT COUNT(DISTINCT p.user_id) " . $from,
+			$this->counts = $student->scalar("SELECT COUNT(DISTINCT p.id) " . $from,
 				array("where" => $this->where));
 
 			$this->pagebar = new pageHelper($this->counts, $page, $size, 10);
@@ -68,9 +68,9 @@
 		}
 
 		public function get_students_ajax() {
-			$param_names = array("class_id", "psort", "page", "size");
+			$param_names = array("class_id", "psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$class_id = $params->class_id == null ? 1 : $params->class_id;
@@ -78,14 +78,18 @@
 			$page = $params->page == null ? 0 : $params->page;
 			$size = $params->size == null ? 10 : $params->size;
 
-			$class = new subclassModel(_db_options());
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+			}
+			$db_options = _db_options();
+			$class = new subclassModel($db_options);
 			$class->select("class_id=".$class_id);
 			if ($class == null)
 				$this->show_error(ERR_NODATA);
 			$this->psort = $psort;
 
 			$students = array();
-			$student = new subuserModel(_db_options());
+			$student = new subuserModel($db_options);
 			
 			$this->where = "p.del_flag=0 AND p.user_type = " . UTYPE_STUDENT;
 			if ($class_id > 1) {
@@ -124,34 +128,25 @@
 			$this->mStudent = $student;
 		}
 
-		public function get_student_ajax() {
-			$param_names = array("student_id");
-			$this->set_api_params($param_names);
-			$this->check_required(array());
-			$params = $this->api_params;
-			$this->start();
-
-			$student_id = $params->student_id;
-			$student = new subuserModel(_db_options());
-			$err = $student->select("id=".$student_id . " AND user_type = " . UTYPE_STUDENT);
-			$classes = substudentclassModel::get_classes($student_id, false);
-			$this->finish(array("student"=>$student->props(), "classes"=>$classes), ERR_OK);
-		}
-
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email",
-		"city", "address", "classes", "avatar_url");
+		"city", "address", "classes", "avatar_url", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("first_name", "gender", "dob"));
+			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
+			$school = _school();
 			$db_options = _db_options();
 			$user = new userModel();
 			if ($params->youthleapuser_id != null) {
 				$user->select("id = " . $params->youthleapuser_id);
 			}
-			$user->school_id = _school_id();
+			$user->school_id = $school->ID;
 			$user->email = $params->email;
 			$user->user_type = UTYPE_STUDENT;
 			$user->is_active = 1;
@@ -185,12 +180,16 @@
 		}
 
 		public function remove_ajax() {
-			$param_names = array("student_id");
+			$param_names = array("student_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("student_id"));
+			$this->check_required(array("student_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
-			
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}			
 			$db_options = _db_options();
 			$student = new subuserModel($db_options);
 			$err = $student->select("id = " . $params->student_id);
@@ -209,12 +208,16 @@
 		}
 
 		public function active_ajax() {
-			$param_names = array("student_id", "is_active");
+			$param_names = array("student_id", "is_active", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("student_id", "is_active"));
+			$this->check_required(array("student_id", "is_active", "user_token"));
 			$params = $this->api_params;
 			$this->start();
 
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 			$db_options = _db_options();
 			$student = new subuserModel($db_options);
 			$err = $student->select("id = " . $params->student_id . " AND user_type = " . UTYPE_STUDENT);
@@ -231,19 +234,6 @@
 				}
 			}
 			$this->finish(null, $err);			
-		}
-
-		public function access_ajax($first_access = 1) {
-			set_time_limit(30);
-
-			$user_id = _user_id();
-			$utype = _utype();
-
-			if ($user_id != "") {
-				logAccessModel::last_access();
-			}
-
-			$this->finish(array("sys_time" => _datetime(null, "Y-m-d H:i")), ERR_OK);
 		}
 
 		public function multi_select($select_type = 0)

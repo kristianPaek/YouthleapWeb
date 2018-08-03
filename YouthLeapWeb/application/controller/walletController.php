@@ -22,11 +22,11 @@
       $this->loadsearch("wallet_list");
       
       $fields = "w.wallet_id, w.user_id, w.points, w.transaction_type_id, w.purpose_id, w.transaction_date,
-      st.first_name, st.middle_name, st.last_name, pu.lookUpValue as purpose_name";
+      st.first_name, st.middle_name, st.last_name, pu.displayName as purpose_name";
 
 			$from = "FROM mt_wallet w 
-      LEFT JOIN t_usermaster st ON w.user_id=st.user_id AND st.user_type = " . UTYPE_STUDENT . "
-      LEFT JOIN c_lookupdetail pu ON pu.id = w.purpose_id";
+      LEFT JOIN t_usermaster st ON w.user_id=st.id AND st.user_type = " . UTYPE_STUDENT . "
+      LEFT JOIN c_lookup pu ON pu.lookup_id = w.purpose_id";
 
       $this->counts = $wallet->scalar("SELECT COUNT(w.wallet_id) " . $from,
 				array("where" => $this->where));

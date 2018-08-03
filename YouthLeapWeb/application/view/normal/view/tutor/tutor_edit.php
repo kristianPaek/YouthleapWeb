@@ -78,7 +78,8 @@
 								<?php $mTutor->hidden("id"); ?>
 								<?php $mTutor->hidden("youthleapuser_id"); ?>
 								<?php $mTutor->hidden("is_active"); ?>
-								<input type="hidden" id="avatar_url" name="avatar_url" val=""/>
+								<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>"/>
+								<input type="hidden" id="avatar_url" name="avatar_url" value=""/>
 								<div class="tab-content">
 									<!-- PERSONAL INFO TAB -->
 									<div class="tab-pane active" id="tab_1_1">
@@ -121,10 +122,6 @@
 									  <div class="form-group">
 										  <label for="address">Address</label>
 										  <?php $mTutor->input("address"); ?>
-									  </div>
-									  <div class="form-group">
-										  <label for="city">About</label>
-										  <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
 									  </div>
 							 		</div>
 									<!-- END PERSONAL INFO TAB -->

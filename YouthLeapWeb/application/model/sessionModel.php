@@ -42,6 +42,7 @@
 				$session->ip = _ip();
 
 				$err = $session->insert();
+				_token($user_id . ":" . $session_id);
 			}
 
 			sessionModel::clear_old_session();

@@ -565,14 +565,11 @@
 						$this->_action_type = ACTIONTYPE_HTML;
 					else {
 						$this->_action_type = ACTIONTYPE_AJAXJSON;
-						/*
-						if ($this->TOKEN != null) {
-							_load_session_from_token($this->TOKEN);
-
-							$db = db::get_db();
-							$db->set_time_zone(_time_zone());
+						if ($this->user_token != null) {
+							if (_load_session_from_token($this->user_token) == false) {
+								$this->finish(null, ERR_INVALID_TOKEN);
+							}
 						}
-						*/
 						$this->check_priv($_action . $api_suffix, UTYPE_NONE);
 					}
 

@@ -74,9 +74,9 @@
 		}
 
 		public function get_tutors_ajax() {
-			$param_names = array("class_id", "psort", "page", "size");
+			$param_names = array("class_id", "psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$class_id = $params->class_id == null ? 1 : $params->class_id;
@@ -84,14 +84,21 @@
 			$page = $params->page == null ? 0 : $params->page;
 			$size = $params->size == null ? 10 : $params->size;
 
-			$class = new subclassModel(_db_options());
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				return;
+			}
+
+			$school = _school();
+			$db_options = _db_options();
+			$class = new subclassModel($db_options);
 			$class->select("class_id=".$class_id);
 			if ($class == null)
 				$this->show_error(ERR_NODATA);
 			$this->psort = $psort;
 
 			$tutors = array();
-			$tutor = new subuserModel(_db_options());
+			$tutor = new subuserModel($db_options);
 
 			$this->where = "p.del_flag=0 AND p.user_type = " . UTYPE_TUTOR;
 			if ($class_id != 1)
@@ -143,48 +150,26 @@
 			$this->mTutor = $tutor;
 		}
 
-		public function get_tutor_ajax() {
-			$param_names = array("tutor_id");
-			$this->set_api_params($param_names);
-			$this->check_required(array("tutor_id"));
-			$params = $this->api_params;
-			$this->start();
-
-			$tutor_id = $params->tutor_id;
-			$tutor = new subuserModel(_db_options());
-			if ($tutor_id != null) {
-				$tutor->select("id=".$tutor_id);
-
-				$classes = subtutorclassModel::get_classes($tutor_id, false);
-				$subjects = subtutorclassModel::get_subjects($tutor_id, false);
-
-				$tutor->class_count = count(subtutorclassModel::get_classes($tutor_id, false));
-				$tutor->subject_count = count(subtutorclassModel::get_subjects($tutor_id, false));
-			} else {
-				$classes = null;
-				$subjects = null;
-
-				$tutor->class_count = 0;
-				$tutor->subject_count = 0;
-			}
-			$this->finish(array("tutor"=>$tutor->props(), "classes"=>$classes
-			, "subjects"=>$subjects), ERR_OK);
-		}
-
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email", "state", 
-		"city", "address", "user_avatar", "is_active", "classes", "subjects", "avatar_url");
+		"city", "address", "user_avatar", "is_active", "classes", "subjects", "avatar_url", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("first_name", "gender", "dob"));
+			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
+			$school = _school();
 
 			$user = new userModel();
 			if ($params->youthleapuser_id != null) {
 				$user->select("id = " .$parmas->youthleapuser_id);
 			}
 			$user->email = $parmas->email;
-			$user->school_id = _school_id();
+			$user->school_id = $school->ID;
 			$user->user_type = UTYPE_TUTOR;
 			$user->email = $params->email;
 			$user->is_active = 1;
@@ -219,11 +204,16 @@
 		}
 
 		public function remove_ajax() {
-			$param_names = array("tutor_id");
+			$param_names = array("tutor_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("tutor_id"));
+			$this->check_required(array("tutor_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 			
 			$db_options = _db_options();
 			$tutor = new subuserModel($db_options);
@@ -244,11 +234,16 @@
 		}
 
 		public function active_ajax() {
-			$param_names = array("tutor_id", "is_active");
+			$param_names = array("tutor_id", "is_active", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("tutor_id", "is_active"));
+			$this->check_required(array("tutor_id", "is_active", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 
 			$db_options = _db_options();
 			$tutor = new subuserModel($db_options);
@@ -258,19 +253,6 @@
 				$tutor->save();
 			}
 			$this->finish(null, $err);			
-		}
-
-		public function access_ajax($first_access = 1) {
-			set_time_limit(30);
-
-			$user_id = _user_id();
-			$utype = _utype();
-
-			if ($user_id != "") {
-				logAccessModel::last_access();
-			}
-
-			$this->finish(array("sys_time" => _datetime(null, "Y-m-d H:i")), ERR_OK);
 		}
 
 		private function loadsearch($session_name) {

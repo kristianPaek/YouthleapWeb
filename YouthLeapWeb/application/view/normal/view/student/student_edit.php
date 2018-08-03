@@ -63,7 +63,8 @@
 						<form role="form" action="api/student/save" id="form_common" class="horizontal-form" method="post">
 							<?php $mStudent->hidden("id"); ?>
 							<?php $mStudent->hidden("youthleapuser_id"); ?>
-							<input type="hidden" id="avatar_url" name="avatar_url" val=""/>
+							<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>" />
+							<input type="hidden" id="avatar_url" name="avatar_url" value=""/>
 							<div class="portlet-body">
 								<div class="tab-content">
 									<!-- PERSONAL INFO TAB -->
@@ -107,10 +108,6 @@
 										<div class="form-group">
 											<label for="address">Address</label>
 											<?php $mStudent->input("address"); ?>
-										</div>
-										<div class="form-group">
-											<label for="city">About</label>
-											<textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
 										</div>
 									</div>
 									<!-- END PERSONAL INFO TAB -->

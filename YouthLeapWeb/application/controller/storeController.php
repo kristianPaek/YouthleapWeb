@@ -77,6 +77,22 @@
       }
       $this->finish(array("categories"=>$categories), ERR_OK);
     }
+
+    public function category_remove_ajax() {
+      $param_names = array("category_id");
+			$this->set_api_params($param_names);
+			$this->check_required(array("category_id"));
+			$params = $this->api_params;
+			$this->start();
+			
+			$db_options = _db_options();
+			$category = new subcategoryModel($db_options);
+			$err = $category->select("id = " . $params->category_id);
+			if ($err == ERR_OK) {
+        $category->remove(true);
+			}
+			$this->finish(null, $err);
+    }
     
     public function category_edit($category_id = null) {
       $category = new subcategoryModel(_db_options());

@@ -30,11 +30,13 @@ $(function () {
   $('.btn-active').click(function() {
       var student_id = "<?php p($mStudent->id); ?>";
       var student_name = "<?php p($mStudent->first_name . " " . $mStudent->last_name); ?>";
+			var user_token = "<?php p(_token());?>";
       confirmBox("Student Active", "Do you want to active "+student_name+"?", function(note) {
         App.callAPI("api/student/active",
           {
             student_id: student_id,
             is_active: 1,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Student Active", student_name+" actived successfully", function() {
@@ -50,11 +52,13 @@ $(function () {
   $('.btn-inactive').click(function() {
       var student_id = "<?php p($mStudent->id); ?>";
       var student_name = "<?php p($mStudent->first_name . " " . $mStudent->last_name); ?>";
+      var user_token = "<?php p(_token());?>";
       confirmBox("Student Inactive", "Do you want to inactive "+student_name+"?", function(note) {
         App.callAPI("api/student/active",
           {
             student_id: student_id,
             is_active: 0,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Student Inactive", student_name+" inactived successfully", function() {
@@ -70,10 +74,12 @@ $(function () {
   $('.btn-remove').click(function() {
       var student_id = "<?php p($mStudent->id); ?>";
       var student_name = "<?php p($mStudent->first_name . " " . $mStudent->last_name); ?>";
+      var user_token = "<?php p(_token());?>";
       confirmBox("Student Remove", "Do you want to remove "+student_name+"?", function(note) {
         App.callAPI("api/student/remove",
           {
-            student_id: student_id
+            student_id: student_id,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Student Remove", student_name+" removed successfully", function() {

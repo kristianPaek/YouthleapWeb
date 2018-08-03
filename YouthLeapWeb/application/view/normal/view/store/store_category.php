@@ -28,7 +28,7 @@
 						<div class="action text-right">
               <a title="View products" class="products"><i class="icon-link"></i> : <?php p($category->product_count);?> </a>
 							<a href="store/category_edit/<?php p($category->id);?>?callback=on_category_update" class="fancybox" fancy-width="450" fancy-height="320" title="Edit"><i class="icon-note"></i></a>
-							<a class="btn-remove" title="Remove"><i class="ln-icon-trash2"></i></a>
+							<a class="btn-remove" category_id = "<?php p($category->id);?>" category_name="<?php p($category->category_name);?>" title="Remove"><i class="ln-icon-trash2"></i></a>
 						</div>
 					</div>
 				</div>

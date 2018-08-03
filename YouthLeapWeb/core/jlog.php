@@ -190,6 +190,7 @@
 					_code_label(CODE_UTYPE, _utype()), _code_label(CODE_LOGTYPE, $log_type), 
 					$msg);
 
+				$prefix = "";
 				if ($log_type == LOGTYPE_BATCH)
 					$prefix = "batch_";
 				$file = LOG_PATH . $prefix . _date(null, "Ym") . ".log";

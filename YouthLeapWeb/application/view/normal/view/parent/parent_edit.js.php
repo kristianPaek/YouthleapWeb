@@ -29,11 +29,13 @@ $(function () {
   $('.btn-active').click(function() {
       var parent_id = "<?php p($mParent->id); ?>";
       var parent_name = "<?php p($mParent->first_name . " " . $mParent->last_name); ?>";
+      var user_token = "<?php p(_token());?>";
       confirmBox("Parent Active", "Do you want to active "+parent_name+"?", function(note) {
         App.callAPI("api/parent/active",
           {
             parent_id: parent_id,
             is_active: 1,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Parent Active", parent_name+" actived successfully", function() {
@@ -49,11 +51,13 @@ $(function () {
   $('.btn-inactive').click(function() {
       var parent_id = "<?php p($mParent->id); ?>";
       var parent_name = "<?php p($mParent->first_name . " " . $mParent->last_name); ?>";
+      var user_token = "<?php p(_token());?>";
       confirmBox("Parent Inactive", "Do you want to inactive "+parent_name+"?", function(note) {
         App.callAPI("api/parent/active",
           {
             parent_id: parent_id,
             is_active: 0,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Parent Inactive", parent_name+" inactived successfully", function() {
@@ -68,11 +72,13 @@ $(function () {
 		
   $('.btn-remove').click(function() {
       var parent_id = "<?php p($mParent->id); ?>";
-      var parent_name = "<?php p($mParent->first_name . " " . $mParent->last_name); ?>";
+      var parent_name = "<?php p($mParent->first_name . " " . $mParent->last_name); ?>";			
+      var user_token = "<?php p(_token());?>";
       confirmBox("Parent Remove", "Do you want to remove "+parent_name+"?", function(note) {
         App.callAPI("api/parent/remove",
           {
-            parent_id: parent_id
+            parent_id: parent_id,
+						user_token: user_token
           })
         .done(function(res) {
                 alertBox("Parent Remove", parent_name+" removed successfully", function() {

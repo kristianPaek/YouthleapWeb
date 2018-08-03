@@ -67,6 +67,46 @@
 			$this->mVideo = $video;
 		}
 
+		public function get_videos_ajax() {
+			$param_names = array("psort", "page", "size", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
+			$params = $this->api_params;
+			$this->start();
+			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
+			$page = $params->page == null ? 0 : $params->page;
+			$size = $params->size == null ? 10 : $params->size;
+
+			$this->psort = $psort;
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+			}
+			$db_options = _db_options();
+			$videos = array();
+			$video = new subvideoModel($db_options);
+			
+			$this->where = "v.del_flag=0";
+
+			$this->loadsearch("parent_list");
+
+			$fields = "v.*";
+
+			$from = "FROM mt_video v ";
+
+			$err = $video->query("SELECT " . $fields . " " . $from,
+				array("where" => $this->where,
+					"order" => $this->order,
+					"limit" => $size,
+					"offset" => $page * $size));
+
+			while ($err == ERR_OK) {
+				$videos[] = array("video"=>$video->props());
+				$err = $video->fetch();
+			}
+
+			$this->finish(array("videos"=>$videos), ERR_OK);
+		}
+
 		public function upload_ajax() {
 			$tmp_path = _video_path("video_file");	
 
@@ -80,11 +120,16 @@
 
 		public function save_ajax() {
 			$param_names = array("video_id", "vision", "video_name", "description", 
-			"year_id", "semester_id", "standard_id", "class_id", "subject_id", "lookup_id", "file", "video_type");
+			"year_id", "semester_id", "standard_id", "class_id", "subject_id", "lookup_id", "file", "video_type", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("video_name", "description", "video_type"));
+			$this->check_required(array("video_name", "description", "video_type", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 			$db_options = _db_options();
 
 			$video = new subvideoModel($db_options);
@@ -100,12 +145,16 @@
 		}
 
 		public function remove_ajax() {
-			$param_names = array("video_id");
+			$param_names = array("video_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("video_id"));
+			$this->check_required(array("video_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
 			
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
 			$db_options = _db_options();
 			$video = new subvideoModel($db_options);
 			$err = $video->select("video_id = " . $params->video_id);

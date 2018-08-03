@@ -64,8 +64,8 @@
 
 	include_once("resource/lang/" . _lang() . ".php");
 
-	if (_request("TOKEN") != null)
-		_load_session_from_token(_request("TOKEN"));
+	if (_request("user_token") != null)
+		_load_session_from_token(_request("user_token"));
 	else
 		session_start();
 
@@ -1593,6 +1593,14 @@
 	//---------------------
 	// 9. User Session Related
 	//---------------------
+	function _token($token = null) {
+		if ($token == null) {
+			return _session("user_token");
+		}
+		else 
+			_session("user_token", $token);
+	}
+
 	function _utype($utype = null) {
 		if ($utype == null)
 			return _session("utype");
@@ -1622,7 +1630,7 @@
 	}
 
 	function _user_middlename($user_middlename = null) {
-		if ($user_firstname == null)
+		if ($user_middlename == null)
 			return _session("user_middlename");
 		else
 			_session("user_middlename", $user_middlename);
@@ -1633,6 +1641,15 @@
 			return _session("user_lastname");
 		else
 			_session("user_lastname", $user_lastname);
+	}
+	function _school() {			
+		$school = schoolmasterModel::get_model(_user()->school_id);
+		if ($school == null) {
+			return false;
+		}
+		$db_options = array("db_host"=>DB_HOSTNAME, "db_user"=>$school->DatabaseUserName, "db_name"=>$school->DatabaseName, "db_password"=>$school->DatabasePassword, "db_port"=>DB_PORT);
+		_db_options($db_options);
+		return $school;
 	}
 
 	function _school_id($school_id = null) {

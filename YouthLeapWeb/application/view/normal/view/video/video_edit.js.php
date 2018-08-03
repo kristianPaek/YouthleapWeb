@@ -25,7 +25,8 @@ $(function () {
 			subject_id: $("#subject_id").val(),
 			lookup_id: $("#lookup_id").val(),
 			file: $("#video_player").attr("src"),
-			video_type: $("input[name='video_type']:checked").val()
+			video_type: $("input[name='video_type']:checked").val(),
+			user_token: "<?php p(_token()); ?>"
 	    }).done(function(res) {
         if (res.err_code == 0) {
 					alertBox("Success", "Video is uploaded.", function() {

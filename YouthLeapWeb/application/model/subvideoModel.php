@@ -22,7 +22,23 @@
           "video_type"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+          "video_id"=>"int", 
+          "vision"=>"varchar",
+          "video_name"=>"varchar",
+          "description"=>"text",
+          "file"=>"varchar",
+          "year_id"=>"int",
+          "semester_id"=>"int",
+          "standard_id"=>"int",
+          "class_id"=>"int",
+          "subject_id"=>"int",
+          "lookup_id"=>"int",
+          "tutor_id"=>"int",
+          "is_active"=>"int",
+          "video_type"=>"int"
+				)
       );
 		}
   }

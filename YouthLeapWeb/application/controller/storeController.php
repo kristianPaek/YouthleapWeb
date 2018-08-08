@@ -226,7 +226,7 @@
     }
 
 		public function product_save_ajax() {
-			$param_names = array("id", "product_name", "short_description", "long_description", "redeem_points", "category_id", "avatar_url");
+			$param_names = array("id", "product_name", "short_description", "long_description", "redeem_points", "category_id");
 			$this->set_api_params($param_names);
 			$this->check_required(array("product_name", "category_id"));
 			$params = $this->api_params;
@@ -240,7 +240,8 @@
 			}
 			$product->load($params);
 
-			if ($params->avatar_url != null) {
+      global $_FILES;
+			if ($_FILES["user_avater"] != null) {
 				$avatarpath = _avatar_path("user_avatar");
 				$avatarfile = basename($avatarpath);
 

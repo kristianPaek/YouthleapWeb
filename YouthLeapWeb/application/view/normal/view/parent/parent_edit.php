@@ -60,7 +60,6 @@
 						<form role="form" action="api/parent/save" id="form_common" class="horizontal-form" method="post">
 						<?php $mParent->hidden("id"); ?>
 						<?php $mParent->hidden("youthleapuser_id"); ?>
-						<input type="hidden" id="avatar_url" name="avatar_url" value=""/>
 						<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>" />
 					  <div class="portlet-body">
 						  <div class="tab-content">

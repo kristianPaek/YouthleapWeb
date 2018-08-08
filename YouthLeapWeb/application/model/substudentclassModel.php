@@ -10,7 +10,13 @@
                 "is_active"
             ),
             array("auto_inc" => true),
-            $db_options
+            $db_options,
+            array(
+                "id" => "int",
+                "class_id" => "int",
+                "student_id" => "int",
+                "is_active" => "int"
+            )
             );
         }
 
@@ -42,7 +48,7 @@
             if ($get_string)
                 return implode(";", $classes);
             else
-                return $classes;
+                return $studentclass->props(array("class_id", "class_path", "class_name"));
         }
 
         static public function save_class($student_id, $classes) 

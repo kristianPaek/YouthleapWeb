@@ -10,7 +10,9 @@
           "category_name"
 				),
         array("auto_inc" => true),
-        $db_options
+				$db_options,
+				array("id"=>"int",
+				"category_name" => "varchar")
       );
 		}
   }

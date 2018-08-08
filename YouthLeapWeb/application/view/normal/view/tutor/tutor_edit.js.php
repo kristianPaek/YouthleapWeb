@@ -44,10 +44,6 @@ $(function () {
 			}
 		}
 	});
-
-	$('#user_avatar').change(function(e) {
-		$("#avatar_url").val(e.target.value);
-	});
   
   $('.btn-active').click(function() {
       var tutor_id = "<?php p($mTutor->id); ?>";

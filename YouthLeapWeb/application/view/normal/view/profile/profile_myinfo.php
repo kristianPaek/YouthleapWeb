@@ -31,11 +31,7 @@
 								<label for="state">State</label>
 								<?php $mSubUser->input("state"); ?>
 							</div>
-							<div class="form-group">
-								<label for="pincode">Pincode</label>
-								<?php $mSubUser->input("pincode"); ?>
-							</div>
-						<?php } else { ?>							
+						<?php } else { ?>
 							<div class="form-group">
 								<label for="first_name">First Name <span class="required">*</span></label></label>
 								<?php $mSubUser->input("first_name"); ?>

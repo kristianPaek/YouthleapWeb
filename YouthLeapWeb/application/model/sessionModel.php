@@ -8,7 +8,15 @@
 				array("login_time",
 					"access_time",
 					"ip"),
-				array("auto_inc" => false));
+				array("auto_inc" => false),
+				null,
+				array(
+					"session_id" => "int",
+					"user_id" => "int",
+					"login_time" => "datetime",
+					"access_time" => "datetime",
+					"ip" => "varchar"
+				));
 		}
 
 		static public function update_session()

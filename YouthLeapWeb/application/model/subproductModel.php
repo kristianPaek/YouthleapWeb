@@ -16,7 +16,17 @@
 					"product_thumb"
 				),
         array("auto_inc" => true),
-        $db_options
+				$db_options,
+				array(
+					"id" => "int",
+					"product_name" => "varchar",
+					"short_description" => "varchar",
+					"long_description" => "text",
+					"redeem_points" => "float",
+					"category_id" => "int",
+					"product_image" => "varchar",
+					"product_thumb" => "varchar"
+				),
       );
 		}
   }

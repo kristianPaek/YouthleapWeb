@@ -15,7 +15,16 @@
           "mood_date"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+          "id" => "int",
+          "student_id" => "int",
+          "mood_id" => "int",
+          "color" => "varchar",
+          "mood_range" => "int",
+          "event_character" => "varchar",
+          "mood_date" => "datetime"
+				),
       );
 		}
   }

@@ -26,7 +26,7 @@
 			$this->loadsearch("parent_list");
 
 			$fields = "p.id, p.first_name, p.middle_name, p.last_name, p.state, p.city, p.address, 
-			p.pincode, p.dob, p.email, p.mobile_no, p.user_image, p.is_active";
+			p.dob, p.email, p.mobile_no, p.user_image, p.is_active";
 
 			$from = "FROM t_usermaster p";
 
@@ -63,7 +63,7 @@
 
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email",
-		"city", "address", "students", "avatar_url", "user_token");
+		"city", "address", "students", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
@@ -99,7 +99,8 @@
 			$subuser->user_type = UTYPE_PARENT;
 			$subuser->is_active = 1;
 
-			if ($params->avatar_url != null) {
+			global $_FILES;
+			if ($_FILES["user_avatar"] != null) {
 				$avatarpath = _avatar_path("user_avatar");
 				$avatarfile = basename($avatarpath);
 

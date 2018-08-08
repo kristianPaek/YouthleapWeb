@@ -8,7 +8,13 @@
 				array("user_id",
 					"login_time",
 					"access_time"),
-				array("dist_inc" => true));
+				array("dist_inc" => true),
+				null,
+				array(
+					"access_id"=>"int",
+					"user_id"=>"int",
+					"login_time"=>"datetime",
+					"access_time"=>"datetime"));
 		}
 
 		static public function login()

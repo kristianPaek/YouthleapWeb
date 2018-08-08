@@ -22,10 +22,6 @@ $(function () {
 			}
 		}
 	});
-
-	$('#user_avatar').change(function(e) {
-		$("#avatar_url").val(e.target.value);
-	});
   
   $('.btn-active').click(function() {
       var student_id = "<?php p($mStudent->id); ?>";

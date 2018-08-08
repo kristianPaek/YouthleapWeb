@@ -9,7 +9,12 @@
                 "student_id"
             ),
             array("auto_inc" => true),
-            $db_options
+            $db_options,
+            array(
+                "id" => "int",
+                "parent_id" => "int",
+                "student_id" => "int"
+            )
             );
         }
 

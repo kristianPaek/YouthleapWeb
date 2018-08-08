@@ -79,7 +79,7 @@
 			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
-			$class_id = $params->class_id == null ? 1 : $params->class_id;
+			$class_id = ($params->class_id == null || $params->class_id < 0 ) ? 1 : $params->class_id;
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
 			$page = $params->page == null ? 0 : $params->page;
 			$size = $params->size == null ? 10 : $params->size;
@@ -152,7 +152,7 @@
 
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email", "state", 
-		"city", "address", "user_avatar", "is_active", "classes", "subjects", "avatar_url", "user_token");
+		"city", "address", "user_avatar", "is_active", "classes", "subjects", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
@@ -165,13 +165,12 @@
 			$school = _school();
 
 			$user = new userModel();
-			if ($params->youthleapuser_id != null) {
+			if ($params->youthleapuser_id != null && $params->youthleapuser_id != -1) {
 				$user->select("id = " .$parmas->youthleapuser_id);
 			}
-			$user->email = $parmas->email;
+			$user->email = $params->email;
 			$user->school_id = $school->ID;
 			$user->user_type = UTYPE_TUTOR;
-			$user->email = $params->email;
 			$user->is_active = 1;
 			if ($user->password == null) {
 				$user->password = _password("12345678");
@@ -188,7 +187,8 @@
 			$tutor->user_type = UTYPE_TUTOR;
 			$tutor->is_active = 1;
 
-			if ($params->avatar_url != null) {
+			global $_FILES;
+			if ($_FILES["user_avatar"] != null) {
 				$avatarpath = _avatar_path("user_avatar");
 				$avatarfile = basename($avatarpath);
 

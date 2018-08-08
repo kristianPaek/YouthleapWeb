@@ -3,12 +3,19 @@
 		public $err_login;
 
 		public function __construct(){
-			parent::__construct();	
+			parent::__construct();
 		}
 
 		public function check_priv($action, $utype)
 		{
-			parent::check_priv($action, UTYPE_NONE);
+			switch($action) {
+				case "save_finger_fp05":
+					parent::check_priv($action, UTYPE_SCHOOL);
+					break;
+				default:
+					parent::check_priv($action, UTYPE_NONE);
+					break;
+			}
     }
     
 		public function login_ajax() {
@@ -66,7 +73,30 @@
 			}
 		}
 
-		public function get_fingers_ajax() {
-			$this->finish(array("finger"=>"111"), ERR_OK);
+		public function save_finger_fp05_ajax() {
+			$param_names = array("user_id", "finger_data", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required($param_names);
+			$params = $this->api_params;
+			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
+
+			$fp_data = new fp05Model(_db_options());
+			$fp_data->select("user_id = " . $params->user_id);
+			$fp_data->user_id = $params->user_id;
+			$fingerpath = _finger_path("finger_image");
+			$fingerfile = basename($fingerpath);
+
+			if (($filename = _upload("finger_image", $fingerpath)) != null) {
+				$fp_data->finger_image = "data/finger/".$fingerfile;
+			}
+			$fp_data->finger_data = $params->finger_data;
+
+			$this->check_error($err = $fp_data->save());
+			$this->finish(null, $err);
 		}
 	}

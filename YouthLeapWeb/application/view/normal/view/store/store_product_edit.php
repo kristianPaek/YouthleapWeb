@@ -52,7 +52,6 @@
 						<form role="form" action="api/store/product_save" id="form_common" class="horizontal-form" method="post">
 							<?php $mProduct->hidden("id"); ?>
 							<?php $mProduct->hidden("user_id"); ?>
-							<input type="hidden" id="avatar_url" name="avatar_url" val=""/>
 							<div class="portlet-body">
 								<div class="tab-content">
 									<!-- PERSONAL INFO TAB -->

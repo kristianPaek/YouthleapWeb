@@ -19,6 +19,19 @@
                   "Status"
                 ),
                 array("auto_inc" => true),
-                $db_options);
+                $db_options,
+                array(
+                    "ID"=>"int",
+                    "SchoolCode" => "varchar",
+                    "SchoolName" => "varchar",
+                    "Address" => "varchar",
+                    "Logo" => "varchar",
+                    "Url" => "varchar",
+                    "DatabaseName" => "varchar",
+                    "DatabaseUserName" => "varchar",
+                    "DatabasePassword" => "varchar",
+                    "is_active" => "int",
+                    "Status" => "varchar"
+                ));
         }
     };

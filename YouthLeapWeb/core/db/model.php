@@ -22,9 +22,11 @@
 		private $_db_name;
 		private $_db_port;
 
+		private $_data_types;
+
 		public $name_prefix;
 
-		function __construct($tname = null, $pkeys = null, $fields = null, $options=null, $db_options=null) {
+		function __construct($tname = null, $pkeys = null, $fields = null, $options=null, $db_options=null, $data_types=null) {
 			$this->_table_name = $tname;
 			$this->_pkeys = is_array($pkeys) ? $pkeys : array($pkeys);
 			$this->_fields = is_array($fields) ? $fields : array($fields);
@@ -46,6 +48,8 @@
 				$this->_db_port = (isset($db_options['db_port']) ? $db_options['db_port'] : null);
 			}
 
+			$this->_data_types = $data_types;
+
 			$this->_db = db::get_db($this->_db_host, $this->_db_user, $this->_db_password, $this->_db_name, $this->_db_port);
 
 			$this->_viewHelper = new viewHelper($this);
@@ -64,21 +68,49 @@
 
 			if ($this->_table_name != null) {
 				// single table mode
+				$data_types = $this->_data_types;
 				foreach($this->_pkeys as $f)
 				{
-					$this->_props[$f] = null;
+					if ($data_types != null) {
+						switch($data_types[$f])
+						{
+							case "int":
+								$this->_props[$f] = -1;
+								break;
+							default:
+							$this->_props[$f] = null;
+								break;
+	
+						}
+					}
+					else {
+						$this->_props[$f] = null;
+					}
 				}
 
 				foreach($this->_fields as $f)
-				{
-					$this->_props[$f] = null;
+				{					
+					if ($data_types != null) {
+						switch($data_types[$f])
+						{
+							case "int":
+								$this->_props[$f] = -1;
+								break;
+							default:
+							$this->_props[$f] = null;
+								break;	
+						}
+					}
+					else {
+						$this->_props[$f] = null;
+					}
 				}
 
 				$this->_fields = array_merge($this->_fields, array("create_time", "update_time", "del_flag"));
 
 				$this->_props["create_time"] = null;
 				$this->_props["update_time"] = null;
-				$this->_props["del_flag"] = null;
+				$this->_props["del_flag"] = -1;
 			}
 			else {
 				// table join mode
@@ -133,12 +165,17 @@
 
 		public function validate_pkey()
 		{
+			$bf_pkey = true;
 			foreach ($this->_pkeys as $field_name)
 			{
 				if (_is_empty($this->_props[$field_name]))
 						return false;
+				if ($this->_props[$field_name] == -1) {
+					$this->_props[$field_name] = null;
+					$bf_pkey = false;
+				}
 			}
-			return true;
+			return $bf_pkey;
 		}
 
 		public function new_id($field_name) 
@@ -214,6 +251,9 @@
 			foreach ($this->_fields as $field_name)
 			{
 				if ($vals != "") $vals .= ",";
+				if ($this->props[$field_name] == -1 && $this->_data_types[$field_name] == "int") {
+					$this->props[$field_name] = null;
+				}
 				$vals .= _sql($this->_props[$field_name]);
 			}
 
@@ -504,8 +544,8 @@
 				return $err;
 
 			$this->sql_result = $this->_db->sql_result;
-			$row = $this->_db->fetch_array($this->sql_result);
 
+			$row = $this->_db->fetch_array($this->sql_result);
 			if (!$row)
 				return ERR_NODATA;
 

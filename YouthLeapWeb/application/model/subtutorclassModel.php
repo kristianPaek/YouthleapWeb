@@ -10,9 +10,17 @@
                 "subject_id",
                 "tutor_id",
                 "is_active"
-            ),
-            array("auto_inc" => true),
-            $db_options
+                ),
+                array("auto_inc" => true),
+                $db_options,
+                array(
+                    "id" => "int",
+                    "academicYear" => "int",
+                    "class_id" => "int",
+                    "subject_id" => "int",
+                    "tutor_id" => "int",
+                    "is_active" => "int"
+                )
             );
         }
 

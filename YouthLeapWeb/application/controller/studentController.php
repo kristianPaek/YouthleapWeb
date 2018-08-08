@@ -39,7 +39,7 @@
 			$this->loadsearch("student_list");
 
 			$fields = "p.id, p.first_name, p.middle_name, p.last_name, p.state, p.city, p.address, 
-			p.pincode, p.dob, p.email, p.mobile_no, p.user_image, p.is_active, c.class_name";
+			p.dob, p.email, p.mobile_no, p.user_image, p.is_active, c.class_name";
 
 			$from = "FROM t_usermaster p 
 				LEFT JOIN mt_studentclass tc ON p.id=tc.student_id
@@ -73,7 +73,7 @@
 			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
-			$class_id = $params->class_id == null ? 1 : $params->class_id;
+			$class_id = ($params->class_id == null || $params->class_id < 0 ) ? 1 : $params->class_id;
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
 			$page = $params->page == null ? 0 : $params->page;
 			$size = $params->size == null ? 10 : $params->size;
@@ -104,6 +104,9 @@
 				LEFT JOIN mt_studentclass tc ON p.id=tc.student_id
 				LEFT JOIN mt_class c ON tc.class_id=c.class_id";
 
+			$this->counts = $student->scalar("SELECT COUNT(DISTINCT p.id) " . $from,
+				array("where" => $this->where));
+
 			$err = $student->query("SELECT " . $fields . " " . $from,
 				array("where" => $this->where,
 					"order" => $this->order,
@@ -112,11 +115,13 @@
 
 			while ($err == ERR_OK) {
 				$class = substudentclassModel::get_classes($student->id, false);
-				$students[] = array("student"=>$student->props(), "class"=>$class);	
+				$fp05 = new fp05Model(_db_options());
+				$fp05->select("user_id =" . $student->id);
+				$students[] = array("student"=>$student->props(), "class"=>$class, "fp05"=>$fp05->props());	
 				$err = $student->fetch();
 			}
 
-			$this->finish(array("students"=>$students), ERR_OK);
+			$this->finish(array("students"=>$students, "count"=>$this->counts), ERR_OK);
 		}
 
 		public function edit($student_id = null) {
@@ -130,7 +135,7 @@
 
 		public function save_ajax() {
 			$param_names = array("id", "youthleapuser_id", "first_name", "middle_name", "last_name", "gender", "dob", "mobile_no", "email",
-		"city", "address", "classes", "avatar_url", "user_token");
+		"city", "address", "classes", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("first_name", "gender", "dob", "user_token"));
 			$params = $this->api_params;
@@ -165,7 +170,8 @@
 			$subuser->is_active = 1;
 			$subuser->email = $params->email;
 
-			if ($params->avatar_url != null) {
+			global $_FILES;
+			if ($_FILES["user_avatar"] != null) {
 				$avatarpath = _avatar_path("user_avatar");
 				$avatarfile = basename($avatarpath);
 

@@ -9,8 +9,10 @@ $(function () {
             App.callAPI("api/profile/check_password", params).done(function(res) {
 				$('[name="old_password"]').val(password);
             }).fail(function(res) {
-            	alert(res.err_msg);
-            	document.location = "<?php p($this->_forward_url); ?>";
+            	errorBox("Error", res.err_msg, function() {
+								// document.location = "<?php p($this->_forward_url); ?>";
+								goto_url("/home");
+							});
             });
 		}, 
 		function() {

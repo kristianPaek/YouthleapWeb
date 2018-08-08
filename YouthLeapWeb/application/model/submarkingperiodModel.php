@@ -11,7 +11,12 @@
           "is_active"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+					"id" => "int",
+          "mark_period" => "varchar",
+          "is_active" => "int"
+				)
       );
 		}
   }

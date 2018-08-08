@@ -17,6 +17,7 @@
 			<div class="tab-content">
 				<div class="tab-pane active" id="tab_main">
 					<form id="password_form" action="api/profile/password" class="form-horizontal" method="post" novalidate="novalidate">
+						<?php $mUser->hidden("id"); ?>
 						<?php $mUser->hidden("old_password"); ?>
 						<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>" />
 						<div class="form-group">

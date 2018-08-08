@@ -7,7 +7,6 @@
 			parent::__construct("mt_class",
 				"class_id",
 				array("class_path",
-					"class_id",
 					"parent_id",
 					"class_name",
 					"content_html",
@@ -15,7 +14,16 @@
 					"sort",
 					"icon_class"),
 				array("auto_inc" => true),
-				$db_options);
+				$db_options,
+				array(
+					"class_id" => "int",
+					"class_path" => "varchar",
+					"parent_id" => "int",
+					"class_name" => "varchar",
+					"content_html" => "varchar",
+					"depth" => "int",
+					"sort" => "varchar",
+					"icon_class"=> "varchar"));
 		}
 
 		public static function get_model($pkvals, $ignore_del_flag=false)

@@ -25,6 +25,8 @@
 	define('AVARTAR_URL',		'avartar/');
 	define('AVARTAR_PATH',		DATA_PATH . AVARTAR_URL);
 
+	define('FINGER_PATH',			DATA_PATH . 'finger/');
+
 	define('VIDEO_URL',		'data/video/');
 	define('VIDEO_PATH',		SITE_ROOT . VIDEO_URL);
 
@@ -1774,6 +1776,27 @@
 			if ($ext != null)
 				$tmpfile .= "." . $ext;
 			$tmppath = AVARTAR_PATH . $tmpfile;
+			
+			if (!file_exists($tmppath))
+				break;
+			
+			$seed += 12345;
+		}
+		
+		return $tmppath;
+	}
+
+	function _finger_path($field)
+	{
+		_mkdir(FINGER_PATH);
+		$ext = _get_uploaded_ext($field);
+		$tmppath = "";
+		$seed = time();
+		while(1) {
+			$tmpfile = sha1($seed);
+			if ($ext != null)
+				$tmpfile .= "." . $ext;
+			$tmppath = FINGER_PATH . $tmpfile;
 			
 			if (!file_exists($tmppath))
 				break;

@@ -21,10 +21,6 @@ $(function () {
 			}
 		}
 	});
-
-	$('#user_avatar').change(function(e) {
-		$("#avatar_url").val(e.target.value);
-	});
   
   $('.btn-active').click(function() {
       var parent_id = "<?php p($mParent->id); ?>";

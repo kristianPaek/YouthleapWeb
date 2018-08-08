@@ -44,7 +44,7 @@
 
 		public function save_ajax() {
 			$param_names = array("gender", "dob", "school_name", "first_name", "middle_name", "last_name", "state", "city", "address", 
-			"pincode", "email", "mobile_no", "NFCTag", "user_token");
+			"email", "mobile_no", "NFCTag", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("user_token"));
 			$params = $this->api_params;
@@ -77,7 +77,7 @@
 		}
 
 		public function password_ajax() {
-			$param_names = array("user_id", "old_password", "new_password", "user_token");
+			$param_names = array("id", "old_password", "new_password", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required($param_names);
 			$params = $this->api_params;
@@ -88,11 +88,11 @@
 				exit;
 			}
 
-			if ($user_id == null) {
+			if ($id == null) {
 				$me = _user();
 			} else {
 				$me = new userModel();
-				$me->select("id = " . $params->user_id);
+				$me->select("id = " . $params->id);
 			}
 			if ($me == null)
 				$this->show_error(ERR_NODATA);
@@ -125,7 +125,7 @@
 				$this->show_error(ERR_NODATA);
 
 			if (_password($params->password) != $me->password) {
-				$this->check_error(ERR_INVALID_OLDPWD);
+				$this->finish(null, ERR_INVALID_OLDPWD);
 			}
 										
 			$this->finish(null, ERR_OK);

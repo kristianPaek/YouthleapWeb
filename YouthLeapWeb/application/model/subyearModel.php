@@ -11,7 +11,12 @@
           "is_active"
 				),
         array("auto_inc" => true),
-        $db_options
+				$db_options,
+				array(
+					"id" => "int",
+					"year" => "int",
+					"is_active" => "int"
+				)
       );
 		}
   }

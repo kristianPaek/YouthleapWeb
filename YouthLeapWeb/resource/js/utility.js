@@ -310,7 +310,7 @@ function alertBox(title, message, callback, tout)
 function errorBox(title, message, callback, tout)
 {
 	if (tout == null)
-		tout = 10000;
+		tout = 1500;
 	$.smallBox({
 		title : title,
 		content : message,

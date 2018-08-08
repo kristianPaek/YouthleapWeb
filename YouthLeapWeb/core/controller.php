@@ -135,7 +135,7 @@
 			if ($this->_code != 200) {
 				header("HTTP/1.1 ".$this->_code." ".$this->get_status_message());
 			}
-			header("Content-Type:".$this->_content_type);
+			header("Content-Type:; charset=utf-8");
 		}
 
 		public function json($data){
@@ -171,7 +171,7 @@
 				$db->commit();
 			else{
 				ob_clean();
-				header('Content-Disposition: inline');
+				header('Content-Disposition: inline;');
 				$db->rollback();
 			}
 
@@ -203,7 +203,7 @@
 					$ret = array("err_code" => $err, "err_msg" => $g_err_msg);
 				}
 				if ($data != null) {
-					$data = is_array($data) ? $data : array($data);
+					$data = is_array($data) ? $data : array($data);					
 					$ret = array_merge($ret , $data);
 				}
 				$this->response($this->json($ret), $status);

@@ -19,7 +19,20 @@
           "is_entry"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+          "id" => "int",
+          "event_name" => "varchar",
+          "subject_id" => "int",
+          "class_id" => "int",
+          "mac_address_id" => "int",
+          "from_date" => "datetime",
+          "to_date" => "datetime",
+          "early_in" => "int",
+          "late_out" => "int",
+          "is_active" => "int",
+          "is_entry" => "int"
+				)
       );
 		}
   }

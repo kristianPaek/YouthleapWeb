@@ -14,7 +14,6 @@
 					"state",
 					"city",
 					"address",
-					"pincode",
 					"dob",
 					"gender",
 					"email",
@@ -25,7 +24,24 @@
 					),
 
         array("auto_inc" => true),
-        $db_options
+				$db_options,
+				array(
+					"id" => "int",
+					"youthleapuser_id" => "int",
+					"first_name" => "varchar",
+					"middle_name" => "varchar",
+					"last_name" => "varchar",
+					"state" => "varchar",
+					"city" => "varchar",
+					"address" => "varchar",
+					"dob" => "DateTime",
+					"gender" => "int",
+					"email" => "varchar",
+					"mobile_no" => "varchar",
+					"user_image" => "varchar",
+					"is_active" => "int",
+					"user_type" => "int"
+				)
       );
 		}
   }

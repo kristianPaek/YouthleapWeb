@@ -21,10 +21,6 @@ $(function () {
 		}
 	});
 
-	$('#user_avatar').change(function(e) {
-		$("#avatar_url").val(e.target.value);
-	});
-		
   $('.btn-remove').click(function() {
       var product_id = "<?php p($mProduct->id); ?>";
       var product_name = "<?php p($mProduct->product_name); ?>";

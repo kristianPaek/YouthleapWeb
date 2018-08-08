@@ -43,9 +43,8 @@
           $subuser->email = $item->F;
           $subuser->city = $item->G;
           $subuser->address = $item->H;
-          $subuser->pincode = $item->I;
-          $subuser->state = $item->J;
-          $subuser->mobile_no = $item->K;
+          $subuser->state = $item->I;
+          $subuser->mobile_no = $item->J;
           $subuser->is_active = 1;
           $subuser->save();
         }
@@ -87,9 +86,8 @@
           $subuser->email = $item->F;
           $subuser->city = $item->G;
           $subuser->address = $item->H;
-          $subuser->pincode = $item->I;
-          $subuser->state = $item->J;
-          $subuser->mobile_no = $item->K;
+          $subuser->state = $item->I;
+          $subuser->mobile_no = $item->J;
           $subuser->is_active = 1;
           $subuser->save();
         }
@@ -130,9 +128,8 @@
           $subuser->email = $item->F;
           $subuser->city = $item->G;
           $subuser->address = $item->H;
-          $subuser->pincode = $item->I;
-          $subuser->state = $item->J;
-          $subuser->mobile_no = $item->K;
+          $subuser->state = $item->I;
+          $subuser->mobile_no = $item->J;
           $subuser->is_active = 1;
           $subuser->save();
         }

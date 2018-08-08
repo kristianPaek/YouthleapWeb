@@ -16,7 +16,17 @@
           "redeeptions_point"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+          "wallet_id" => "int",
+          "user_id" => "int",
+          "points" => "int",
+          "transaction_type_id" => "int",
+          "purpose_id" => "int",
+          "transaction_date" => "datetime",
+          "is_active" => "int",
+          "redeeptions_point" => "int"
+        )
       );
 		}
   }

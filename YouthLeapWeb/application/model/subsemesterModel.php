@@ -12,7 +12,13 @@
           "is_active"
 				),
         array("auto_inc" => true),
-        $db_options
+        $db_options,
+				array(
+					"id" => "int",
+          "semester_code" => "varchar",
+          "semester" => "varchar",
+          "is_active" => "int"
+				),
       );
 		}
   }

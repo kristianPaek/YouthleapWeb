@@ -14,7 +14,17 @@
 					"is_active"
 					),
 
-				array("auto_inc" => true));
+				array("auto_inc" => true),
+				null,
+				array(
+					"id" => "int",
+					"school_id" => "int",
+					"email" => "varchar",
+					"password" => "varchar",
+					"user_type" => "int",
+					"is_active" => "int"
+					)
+			);
 		}
 
 		public static function get_totalcount() {

@@ -11,6 +11,15 @@
 					"to_id", 
 					"to_type", 
 					"read_flag"),
-				array("dist_inc" => true));
+				array("dist_inc" => true),
+				null,
+				array(
+					"message_id" => "int",
+					"message_type"=> "int",
+					"content" => "varchar",
+					"from_id" => "int",
+					"to_id" => "int",
+					"to_type" => "int",
+					"read_flag" => "int"));
 		}
 	};

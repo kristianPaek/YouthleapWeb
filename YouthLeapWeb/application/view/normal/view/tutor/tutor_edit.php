@@ -79,7 +79,6 @@
 								<?php $mTutor->hidden("youthleapuser_id"); ?>
 								<?php $mTutor->hidden("is_active"); ?>
 								<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>"/>
-								<input type="hidden" id="avatar_url" name="avatar_url" value=""/>
 								<div class="tab-content">
 									<!-- PERSONAL INFO TAB -->
 									<div class="tab-pane active" id="tab_1_1">

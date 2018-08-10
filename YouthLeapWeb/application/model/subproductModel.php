@@ -26,7 +26,7 @@
 					"category_id" => "int",
 					"product_image" => "varchar",
 					"product_thumb" => "varchar"
-				),
+				)
       );
 		}
   }

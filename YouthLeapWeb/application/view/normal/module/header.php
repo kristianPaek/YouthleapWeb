@@ -11,9 +11,6 @@
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-6 additional-nav">
 				<ul class="list-unstyled list-inline pull-right">
-					<li class="hidden-xs dropdown-extended dropdown-inbox">
-						<?php messageModule::show("new_message"); ?>
-					</li>
 					<!--<li class="hidden-xs"><i class="icon-bell"></i> 5</li>-->
 					<li class="hidden-xs contact"><i class="fa fa-phone"></i> <?php p(CONTACT_TEL); ?></li>
 					<?php if (_user_id() == null) { ?>

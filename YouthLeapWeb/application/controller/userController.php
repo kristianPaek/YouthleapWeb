@@ -99,4 +99,32 @@
 			$this->check_error($err = $fp_data->save());
 			$this->finish(null, $err);
 		}
+
+		public function save_finger_hf7000_ajax() {
+			$param_names = array("user_id", "finger_data", "card_data", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_id", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
+
+			$hf7000_data = new hf7000Model(_db_options());
+			$hf7000_data->select("user_id = " . $params->user_id);
+			$hf7000_data->user_id = $params->user_id;
+			$fingerpath = _finger_path("finger_image");
+			$fingerfile = basename($fingerpath);
+
+			if (($filename = _upload("finger_image", $fingerpath)) != null) {
+				$hf7000_data->finger_image = "data/finger/".$fingerfile;
+			}
+			$hf7000_data->finger_data = $params->finger_data;
+			$hf7000_data->card_data = $params->card_data;
+
+			$this->check_error($err = $hf7000_data->save());
+			$this->finish(null, ERR_OK);
+		}
 	}

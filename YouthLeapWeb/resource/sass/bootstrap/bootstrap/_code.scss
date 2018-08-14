@@ -59,6 +59,12 @@ pre {
     background-color: transparent;
     border-radius: 0;
   }
+
+  .string { color: green; }
+  .number { color: darkorange; }
+  .boolean { color: blue; }
+  .null { color: magenta; }
+  .key { color: red; }
 }
 
 // Enable scrollable blocks of code

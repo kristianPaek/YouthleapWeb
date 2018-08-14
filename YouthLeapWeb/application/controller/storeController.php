@@ -44,15 +44,19 @@
     }
 
     public function get_categories_ajax() {
-      $param_names = array("psort", "page", "size");
+      $param_names = array("psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
 			$page = $params->page == null ? 0 : $params->page;
       $size = $params->size == null ? 10 : $params->size;
       
+      if (_school() == false) {
+        $this->finish(null, ERR_NODATA);
+      }
+
       $categories = array();
       $category = new subcategoryModel(_db_options());
       
@@ -72,19 +76,22 @@
       while ($err == ERR_OK) {
         $product = new subproductModel(_db_options());
         $category->product_count = $product->scalar("SELECT COUNT(DISTINCT id) FROM c_products");
-        $categories[] = clone $category;
+        $categories[] = $category->props();
         $err = $category->fetch();
       }
       $this->finish(array("categories"=>$categories), ERR_OK);
     }
 
     public function category_remove_ajax() {
-      $param_names = array("category_id");
+      $param_names = array("category_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("category_id"));
+			$this->check_required(array("category_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
-			
+      
+      if (_school() == false) {
+        $this->finish(null, ERR_NODATA);
+      }
 			$db_options = _db_options();
 			$category = new subcategoryModel($db_options);
 			$err = $category->select("id = " . $params->category_id);

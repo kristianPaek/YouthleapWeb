@@ -115,9 +115,13 @@
 
 			while ($err == ERR_OK) {
 				$class = substudentclassModel::get_classes($student->id, false);
+
+				$hf7000 = new hf7000Model(_db_options());
+				$hf7000->select("user_id = " . $student->id);				
+
 				$fp05 = new fp05Model(_db_options());
 				$fp05->select("user_id =" . $student->id);
-				$students[] = array("student"=>$student->props(), "class"=>$class, "fp05"=>$fp05->props());	
+				$students[] = array("student"=>$student->props(), "class"=>$class, "fp05"=>$fp05->props(), "hf7000"=>$hf7000->props());	
 				$err = $student->fetch();
 			}
 

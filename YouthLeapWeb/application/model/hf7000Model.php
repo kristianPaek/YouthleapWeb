@@ -1,0 +1,28 @@
+<?php
+
+	class hf7000Model extends model 
+	{
+		public function __construct($db_options)
+		{
+			parent::__construct("c_data_hf7000",
+				"id",
+				array(
+					"user_id",
+					"finger_image",
+          "finger_data",
+          "card_data"
+					),
+
+        array("auto_inc" => true),
+        $db_options,
+				array(
+					"id" => "int",
+					"user_id" => "int",
+					"finger_image" => "varchar",
+          "finger_data" => "varchar",
+          "card_data" => "varchar"
+				)
+      );
+		}
+  }
+?>

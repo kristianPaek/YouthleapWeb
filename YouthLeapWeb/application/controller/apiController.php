@@ -26,6 +26,7 @@
 	class APIController extends controller {
 		protected $api_name = "";
 		protected $api_url = "", $apitest_url = "";
+		protected $apitest_baseurl = "";
 		protected $apis = null;
 		protected $api_methods = null;
 		protected $api_params = null, $api_param_names = null;

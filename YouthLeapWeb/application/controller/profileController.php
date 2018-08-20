@@ -66,13 +66,17 @@
 				$this->show_error(ERR_NODATA);
 			$subuser->load($params);
 
+			global $_FILES;
+			if ($_FILES["user_avatar"] != null) {
+				$avatarpath = _avatar_path("user_avatar");
+				$avatarfile = basename($avatarpath);
+
+				if (($filename = _upload("user_avatar", $avatarpath)) != null) {
+					$subuser->user_image = "data/".AVARTAR_URL.$avatarfile;
+				}
+			}
 			$this->check_error($err = $subuser->save());
-		
-			// update_avartar
-			$me->update_avartar($params->photo);
-
-			_first_logined(2);	
-
+			
 			$this->finish(null, $err);
 		}
 

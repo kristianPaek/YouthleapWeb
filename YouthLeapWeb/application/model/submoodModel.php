@@ -24,7 +24,7 @@
           "mood_range" => "int",
           "event_character" => "varchar",
           "mood_date" => "datetime"
-				),
+				)
       );
 		}
   }

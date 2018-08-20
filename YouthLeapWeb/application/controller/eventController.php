@@ -47,6 +47,54 @@
       $this->mEvents = $events;
 		}
 
+		public function get_event_list_ajax() {
+			$param_names = array("psort", "page", "size", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
+			$page = $params->page == null ? 0 : $params->page;
+			$size = $params->size == null ? 10 : $params->size;
+			
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				return;
+			}
+      $db_options = _db_options();
+      $event = new subeventModel($db_options);
+      $sql = "SELECT ae.*, c.class_name, st.subject_name
+      FROM e_attendance_event ae 
+      LEFT JOIN mt_class c ON c.class_id = ae.class_id 
+      LEFT JOIN mt_subject st ON st.id = ae.subject_id";
+
+      $this->where = "1=1";
+			$this->psort = $psort;
+      $this->loadsearch("event_index");
+      $this->counts = $event->scalar("SELECT COUNT(st.id) FROM e_attendance_event st ",
+      array("where" => $this->where));
+
+      $this->pagebar = new pageHelper($this->counts, $page, $size, 10);
+
+      $err = $event->query($sql, 
+      array("where" => $this->where,
+				"order" => $this->order,
+				"limit" => $size,
+				"offset" => $this->pagebar->page * $size));
+
+			if ($err != ERR_OK) {
+				$this->finish(null, $err);
+				return;
+			}
+      $events = array();
+      while($err == ERR_OK) {
+        array_push($events, $event->props());
+        $err = $event->fetch();
+			}
+			$this->finish(array("events"=>$events), ERR_OK);
+		}
+
 		private function loadsearch($session_name) {
 			$this->search = new reqsession($session_name);
 

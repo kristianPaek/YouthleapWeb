@@ -75,6 +75,67 @@
 			$this->addjs("js/bootstrap-wizard/jquery.bootstrap.wizard.min.js");
 		}
 
+		public function get_moodlist_ajax() {
+			$param_names = array("user_id", "psort", "page", "size", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_id", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
+			$page = $params->page == null ? 0 : $params->page;
+			$size = $params->size == null ? 10 : $params->size;
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				return;
+			}
+
+			$db_options = _db_options();
+			$studentmood = new submoodModel($db_options);
+      $sql = "SELECT m.* FROM e_studentmood m ";
+
+			$this->where = "1=1";
+			switch (_utype()) {
+				case UTYPE_ADMIN:
+				break;
+				case UTYPE_SCHOOL:
+				break;
+				case UTYPE_STUDENT:
+				$this->where .= " AND m.student_id = " . $params->user_id;
+				break;
+				case UTYPE_PARENT:				
+				break;
+			}
+			$this->psort = $psort;
+      $this->loadsearch("mood_index");
+      $this->counts = $studentmood->scalar("SELECT COUNT(m.id) FROM e_studentmood m ",
+			array("where" => $this->where));
+
+      $err = $studentmood->query($sql, 
+      array(
+        "where" => $this->where,
+        "limit" => $size,
+      "limit" => $size,
+      "offset" => $page * $size));
+
+			$studentmoods = array();
+			if ($err != ERR_OK) {
+				$this->finish(null, $err);
+			}
+      while($err == ERR_OK) {
+				$student = new subuserModel($db_options);
+				$student->select("id = " . $studentmood->student_id);
+
+				$lookup = new sublookupModel($db_options);
+				$lookup->select("lookup_id = " . $studentmood->mood_id);
+				$mood_image = _mood_url($lookup->displayName);
+				array_push($studentmoods, array("mood"=>array_merge($studentmood->props(), array("mood_image"=>$mood_image)), "student"=>$student->props()));
+        $err = $studentmood->fetch();
+			}
+			$this->finish(array("moods"=>$studentmoods), ERR_OK);
+		}
+
 		public function save_ajax() {
 			$param_names = array("id", "mood_id", "color_name", "event_id");
 			$this->set_api_params($param_names);

@@ -20,7 +20,7 @@
           "displayName" => "varchar",
           "depth" => "int",
           "sort" => "varchar"
-				),
+				)
       );
 		}
   }

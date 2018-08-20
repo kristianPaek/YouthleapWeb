@@ -28,3 +28,11 @@
 		</table>
 	</div>
 </div>
+
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="navbar-form pull-right">
+			<a href="<?php p($this->apitest_url); ?>../" class="btn btn-default"><i class="fa fa-fw fa-times"></i> Return</a>
+		</div>
+	</div>
+</div>

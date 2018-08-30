@@ -11,7 +11,7 @@
 		{
 			switch($action) {
 				case "index":
-					parent::check_priv($action, UTYPE_TUTOR);
+					parent::check_priv($action, UTYPE_TUTOR | UTYPE_STUDENT);
 					break;
 				case "edit":
 					parent::check_priv($action, UTYPE_TUTOR);

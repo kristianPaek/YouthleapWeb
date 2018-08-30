@@ -67,6 +67,7 @@
 	define("CODE_PSORT",												7);
 	define("CODE_LOOKUP",												8);
 	define("CODE_VIDEOTYPE",										9);
+	define("CODE_TRANSTYPE",										10);
 
 	// User Priv
 	define('UTYPE_NONE',                        0);
@@ -117,3 +118,6 @@
 
 	define("VIDEO_PUBLIC",											0);
 	define("VIDEO_PRIVATE",											1);
+
+	define("TRANS_TYPE_IN",											-1);
+	define("TRANS_TYPE_OUT",										1);

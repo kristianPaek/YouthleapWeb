@@ -27,15 +27,15 @@
 			$from = "FROM mt_wallet w 
       LEFT JOIN t_usermaster st ON w.user_id=st.id AND st.user_type = " . UTYPE_STUDENT . "
       LEFT JOIN c_lookup pu ON pu.lookup_id = w.purpose_id";
-
-      $this->counts = $wallet->scalar("SELECT COUNT(w.wallet_id) " . $from,
-				array("where" => $this->where));
 			
 			switch(_utype()) {
 				case UTYPE_STUDENT:
 				$this->where .= " AND w.user_id =" . _user_sub_id();
 				break;
 			}
+
+      $this->counts = $wallet->scalar("SELECT COUNT(w.wallet_id) " . $from,
+				array("where" => $this->where));
 
 			$this->pagebar = new pageHelper($this->counts, $page, $size, 10);
 
@@ -50,6 +50,35 @@
         $err = $wallet->fetch();
       }
       $this->mWallets = $wallets;
+		}
+
+		public function edit($wallet_id = null) {
+			$db_options = _db_options();
+			$wallet = new subwalletModel($db_options);
+			if ($wallet_id != null) {
+				$wallet->select("wallet_id =" . $wallet_id);
+			}
+			$this->mWallet = $wallet;
+		}
+
+		public function remove_ajax() {
+			$param_names = array("wallet_id", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("wallet_id", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}			
+			$db_options = _db_options();
+			$wallet = new subwalletModel($db_options);
+			$err = $wallet->select("wallet_id = " . $params->wallet_id);
+			if ($err == ERR_OK) {
+				$wallet->remove(true);
+			}
+			$this->finish(null, $err);
 		}
 
 		public function get_walletlist_ajax() {
@@ -106,6 +135,31 @@
         $err = $wallet->fetch();
       }
       $this->finish(array("wallets"=>$wallets), ERR_OK);
+		}
+
+		public function save_ajax() {
+			$param_names = array("wallet_id", "purpose_id", "points", "transaction_type_id", "transaction_date", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("purpose_id", "points", "transaction_type_id", "transaction_date", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
+
+			$school = _school();
+			$db_options = _db_options();
+
+			$wallet = new subwalletModel($db_options);
+			if ($params->wallet_id != null) {
+				$wallet->select("wallet_id = " . $params->wallet_id);
+			}
+			$wallet->load($params);
+			$wallet->user_id = _user_sub_id();
+			$wallet->is_active = 1;
+			$err = $wallet->save();
+			$this->finish(null, $err);
 		}
 
 		private function loadsearch($session_name) {

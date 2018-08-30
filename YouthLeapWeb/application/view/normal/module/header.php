@@ -268,7 +268,7 @@
 							<span><?php p("Tutorial Video"); ?></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="profile/password">Video List</a></li>
+							<li><a href="video/index">Video List</a></li>
 						</ul>
 					</li>
 					<li class="dropdown <?php $this->set_active('mood'); ?>" title="<?php p("Mood Meter"); ?>">

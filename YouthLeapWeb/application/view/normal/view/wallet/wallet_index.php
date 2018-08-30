@@ -8,7 +8,9 @@
 					<?php $this->search->input("search_string", array("class" => "input-circle-left", "placeholder" => _l("Search..."), "maxlength" => "50")); ?>
 					<?php $this->search->select_psort("sort", "wallet/index"); ?>
 			</div>
-			<a class="btn btn-default" href=""><i class="icon-plus"></i> Add</a>
+			<?php if (_utype() == UTYPE_STUDENT) { ?>
+			<a class="btn btn-default" href="wallet/edit"><i class="icon-plus"></i> Add</a>
+			<?php } ?>
 		</form>
 		<h1><?php p($this->title); ?></h1>
 		<div class="product-list">
@@ -17,10 +19,15 @@
 				<thead>
 					<tr>
 						<th class="td-no">#</th>
+						<?php if (_utype() != UTYPE_STUDENT) { ?>
 						<th>STUDENT NAME</th>
+						<?php } ?>
 						<th>TRANSACTION DATE</th>
 						<th>POINTS</th>
 						<th>PURPOSE</th>
+						<?php if (_utype() == UTYPE_STUDENT) { ?>
+						<th></th>
+						<?php } ?>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,7 +37,9 @@
 				?>
 					<tr>
 						<td><?php p($i); ?></td>
+						<?php if (_utype() != UTYPE_STUDENT) { ?>
 						<td><?php p($wallet->first_name . " " . $wallet->last_name); ?></td>
+						<?php } ?>
 						<td><?php p($wallet->transaction_date); ?></td>
 						<td>
 							<?php if ($wallet->transaction_type_id == -1) { ?>
@@ -41,6 +50,12 @@
 							<?php } ?>
 						</td>
 						<td><?php p($wallet->purpose_name); ?></td>
+						<?php if (_utype() == UTYPE_STUDENT) { ?>
+						<td class="text-center">
+							<a href="wallet/edit/<?php p($wallet->wallet_id);?>" class="favorite" title="Edit"><i class="icon-note"></i></a>
+							<a class="btn-remove" title="Remove" wallet_id="<?php p($wallet->wallet_id);?>"><i class="ln-icon-trash2"></i></a>
+						</td>
+						<?php } ?>
 					</tr>
 				<?php
 						$i ++;

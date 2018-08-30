@@ -93,6 +93,10 @@
 		CODE_VIDEOTYPE => array(
 			VIDEO_PUBLIC => "Public",
 			VIDEO_PRIVATE => "Private"
+		),
+		CODE_TRANSTYPE => array(
+			TRANS_TYPE_IN => "TRANS TYPE IN",
+			TRANS_TYPE_OUT => "TRANS TYPE OUT"
 		)
 	);
 

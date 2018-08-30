@@ -10,6 +10,7 @@
           "student_id",
           "mood_id",
           "color",
+          "phrase",
           "event_id",
           "mood_date"
 				),
@@ -19,6 +20,7 @@
           "id" => "int",
           "student_id" => "int",
           "mood_id" => "int",
+          "phrase" => "varchar",
           "color" => "varchar",
           "event_id" => "int",
           "mood_date" => "datetime"

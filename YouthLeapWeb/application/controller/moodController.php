@@ -234,9 +234,9 @@
 		}
 
 		public function save_ajax() {
-			$param_names = array("id", "mood_id", "color_name", "event_id", "mood_date", "user_token");
+			$param_names = array("id", "mood_id", "color_name", "event_id", "phrase", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("mood_id", "color_name", "event_id", "mood_date", "user_token"));
+			$this->check_required(array("mood_id", "color_name", "event_id", "phrase", "user_token"));
 			$params = $this->api_params;
 			$this->start();
 
@@ -254,7 +254,8 @@
 			$mood->mood_id = $params->mood_id;
 			$mood->color = $params->color_name;
 			$mood->event_id = $params->event_id;
-			$mood->mood_date = $params->mood_date;
+			$mood->mood_date = _date();
+			$mood->phrase = $params->phrase;
 			$this->check_error($err = $mood->save());
 			$this->finish(null, $err);
 		}

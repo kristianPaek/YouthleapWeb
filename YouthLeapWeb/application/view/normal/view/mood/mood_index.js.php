@@ -42,6 +42,7 @@ function get_mood_list(event_id, date) {
           mood_item += "    <img src='"+mood.mood.mood_image+"' style='margin: 5px 20px;'/>";
           mood_item += "    <div style='padding-top: 5px; padding-bottom: 5px;color:"+mood.mood.font_color+";display:grid;align-items:center;width:70%'>";
           mood_item += "      <label style='display:block;'>"+mood.student.first_name + " " + mood.student.last_name+"</label>";
+          mood_item += "      <label style='display:block;'>"+mood.mood.phrase+"</label>";
           mood_item += "      <span>Class1<em style='float:right;'>"+mood.mood.mood_date+"</em></span>";
           mood_item += "    </div>";
           mood_item += "  </div>";

@@ -42,6 +42,8 @@
 				<script src="js/bootstrap-fileinput/bootstrap-fileinput.js?<?php p(VERSION);?>" type="text/javascript"></script>
         <script src="js/bootstrap-datepicker/js/bootstrap-datepicker.js?<?php p(VERSION);?>" type="text/javascript"></script>
         <script src="js/bootstrap-datepicker/js/locales/bootstrap-datepicker.kp.js?<?php p(VERSION);?>" type="text/javascript"></script>
+				<script src="js/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+				<script src="js/bootstrap-datepaginator/bootstrap-datepaginator.min.js" type="text/javascript"></script>
 		<script src="js/bootstrap-timepicker/js/bootstrap-timepicker.min.js?<?php p(VERSION);?>" type="text/javascript"></script>
         <script src="js/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js?<?php p(VERSION);?>" type="text/javascript"></script>
 				<script src="js/bootstrap-toggle/bootstrap-toggle.min.js?<?php p(VERSION);?>" type="text/javascript"></script>
@@ -61,6 +63,7 @@
 		<link rel="stylesheet" type="text/css" href="js/autocomplete/jquery.autocomplete.css?<?php p(VERSION);?>" />
 		<link rel="stylesheet" type="text/css" href="js/autocomplete/lib/thickbox.css?<?php p(VERSION);?>" />
 		<link rel="stylesheet" type="text/css" href="js/bootstrap-fileinput/bootstrap-fileinput.css?<?php p(VERSION); ?>" />
+		<link rel="stylesheet" type="text/css" href="js/bootstrap-datepaginator/bootstrap-datepaginator.min.css?<?php p(VERSION);?>" />
 
 		<!-- jquery fancybox -->
 		<script src="js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js?<?php p(VERSION);?>" type="text/javascript"></script>

@@ -251,6 +251,19 @@
 
 		return false;
 	}
+
+	function _mood_colors() {		
+		return array(array("#f60000","#f61c00","#f73f00","#f75c00","#f87900","#fab600","#f8c203","#f6ce0a","#f5db11","#f4e715"),
+		array("#e60000","#e62000","#e63b00","#e65200","#e76800","#f4b706","#f3c00a","#f1ca0f","#f0d413","#f0de17"),
+		array("#d50200","#d52100","#d63600","#d64700","#d65800","#eeb70e","#edbe10","#ebc613","#ebcd16","#ead518"),
+		array("#c90f06","#c92407","#c93309","#c9400a","#c94d0c","#e9b713","#e8bc15","#e7c217","#e7c818","#e6cd1a"),
+		array("#bc1814","#bc2514","#bc2f15","#bd3815","#bd4116","#e5b718","#e4bb1a","#e4be1a","#e4c21b","#e3c61c"),
+		array("#192ad5","#224ec9","#2a6bc1","#3589b7","#3b9bb0","#7dbe3d","#7dbc38","#7dba33","#7cb82f","#7cb72a"),
+		array("#1829b4","#2045ab","#275da4","#30759c","#388a95","#66b540","#66b33a","#65af31","#65ad2b","#64ab25"),
+		array("#192893","#203d8c","#254e88","#2c6082","#32707c","#51ac43","#50a93a","#4fa42e","#4fa126","#4e9e1f"),
+		array("#1c277c","#203976","#254473","#2a526f","#2e5e6a","#38a047","#369b3a","#35952b","#349120","#338d17"),
+		array("#1e2664","#213160","#23395e","#27425b","#294a58","#27944b","#258e3b","#228728","#21821a","#1f7d0f"));
+	}
 	
 	// clear/get/set Server data
 	function _server($name=null, $value="@no_val@")
@@ -2731,4 +2744,58 @@
         $content .= "    </rss>\n";
 
         return $content;
+	}
+	
+	function getMoodFontColor($rgb)
+	{
+			// these are not the actual rgb values
+			$colors = array("white" =>0xFFFFFF, "black" => 0x000000);
+
+			$largestDiff = 0;
+			$closestColor = "";
+			foreach ($colors as $name => $rgbColor)
+			{
+					if (colorDiff($rgbColor,$rgb) > $largestDiff)
+					{
+							$largestDiff = colorDiff($rgbColor,$rgb);
+							$closestColor = $name;
+					}
+
+			}
+			return $closestColor;
+
+	}
+
+	function colorDiff($rgb1,$rgb2)
+	{
+			// do the math on each tuple
+			// could use bitwise operates more efficiently but just do strings for now.
+			$red1   = hexdec(substr($rgb1,0,2));
+			$green1 = hexdec(substr($rgb1,2,2));
+			$blue1  = hexdec(substr($rgb1,4,2));
+
+			$red2   = hexdec(substr($rgb2,0,2));
+			$green2 = hexdec(substr($rgb2,2,2));
+			$blue2  = hexdec(substr($rgb2,4,2));
+
+			return abs($red1 - $red2) + abs($green1 - $green2) + abs($blue1 - $blue2) ;
+	}
+
+	function is_url_exist($url){
+			if ($url == null || $url == "") {
+				return false;
+			}
+			$url = _abs_url($url);
+			$ch = curl_init($url);	
+			curl_setopt($ch, CURLOPT_NOBODY, true);
+			curl_exec($ch);
+			$code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+			if($code == 200){
+				$status = true;
+			}else{
+				$status = false;
+			}
+			curl_close($ch);
+		return $status;
 	}

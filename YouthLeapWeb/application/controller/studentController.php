@@ -57,6 +57,9 @@
 					"offset" => $this->pagebar->page * $size));
 
 			while ($err == ERR_OK) {
+				if (!is_url_exist($student->user_image)) {
+					$student->user_image = null;
+				}
 				$students[] = clone $student;
 				$err = $student->fetch();
 			}

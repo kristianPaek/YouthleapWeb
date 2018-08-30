@@ -12,13 +12,12 @@ $(function () {
 	}
   });
 
-  $(".color-img").click(function() {
-	var item = $(this).find(".foo");
-	if ($(item).hasClass("active")) {
-	  $(".foo").removeClass("active");
+  $(".btn-color").click(function() {
+	if ($(this).hasClass("active")) {
+	  $(this).removeClass("active");
 	} else {
-	  $(".foo").removeClass("active");
-	  $(this).find(".foo").addClass("active");
+		$(".btn-color").removeClass("active");
+	  $(this).addClass("active");
 		$("#color_name").val($(this).attr("color_name"));
 	}
   });

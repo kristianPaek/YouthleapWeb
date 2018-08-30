@@ -13,8 +13,11 @@
 		</form>
 		<h1><?php p($this->title); ?></h1>
 		<div class="product-list">
-			<div class="row">
-				<?php foreach($mCategories as $category) { ?>
+			<?php $idx = 0; ?>
+			<?php foreach($mCategories as $key => $category) { 
+				if ($key % 4 == 0) { ?>
+				<div class="row">
+				<?php } ?>
 				<div class="col-20-lg-4 col-20-md-4 col-20-sm-5 col-20-xs-10" style="opacity: 1;">
           <div class="category-item" category_id="<?php p($category->id);?>">
             <a href="store/category_edit/<?php p($category->id);?>?callback=on_category_update" class="text-center fancybox" fancy-width="450" fancy-height="320" title="Edit">
@@ -32,8 +35,13 @@
 						</div>
 					</div>
 				</div>
+				<?php if ($key % 4 == 3) { ?>
+					</div>
 				<?php } ?>
-			</div>
+			<?php } ?>
+			<?php if ($key % 4 != 0 ) { ?>
+				</div>
+			<?php } ?>
 			<?php _nodata_message($mCategories); ?>              
 			<?php $this->pagebar->display(_url("store/category/" . $this->psort . "/")); ?>
 		</div>

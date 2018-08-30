@@ -28,8 +28,7 @@
 			$this->psort = $psort;
       $this->loadsearch("event_index");
       $this->counts = $event->scalar("SELECT COUNT(st.id) FROM e_attendance_event st ",
-      array("where" => $this->where));
-
+			array("where" => $this->where));
       $this->pagebar = new pageHelper($this->counts, $page, $size, 10);
 
       $err = $event->query($sql, 
@@ -41,9 +40,9 @@
 
       $events = array();
       while($err == ERR_OK) {
-        array_push($events, $event);
+        array_push($events, clone $event);
         $err = $event->fetch();
-      }
+			}
       $this->mEvents = $events;
 		}
 
@@ -95,6 +94,17 @@
 			$this->finish(array("events"=>$events), ERR_OK);
 		}
 
+		public function edit($event_id = null) {
+			$db_options = _db_options();
+			if ($event_id == null) {
+				$event = new subeventModel($db_options);
+			} else {
+				$event = new subeventModel($db_options);
+				$event->select("id = " . $event_id);
+			}
+			$this->mEvent = $event;
+		}
+
 		private function loadsearch($session_name) {
 			$this->search = new reqsession($session_name);
 
@@ -115,5 +125,28 @@
 					$this->order = "st.create_time ASC";
 					break;
 			}
+		}
+
+		public function save_ajax() {
+			$param_names = array("id", "event_name", "subject_id", "class_id", "from_date", "to_date", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("event_name", "subject_id", "class_id", "from_date", "to_date", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				exit;
+			}
+
+			$school = _school();
+			$db_options = _db_options();
+
+			$event = new subeventModel($db_options);
+			if ($params->id != null) {
+				$event->select("id = " . $params->id);
+			}
+			$event->load($params);
+			$err = $event->save();
+			$this->finish(null, $err);
 		}
 	}

@@ -10,8 +10,7 @@
           "student_id",
           "mood_id",
           "color",
-          "mood_range",
-          "event_character",
+          "event_id",
           "mood_date"
 				),
         array("auto_inc" => true),
@@ -21,8 +20,7 @@
           "student_id" => "int",
           "mood_id" => "int",
           "color" => "varchar",
-          "mood_range" => "int",
-          "event_character" => "varchar",
+          "event_id" => "int",
           "mood_date" => "datetime"
 				)
       );

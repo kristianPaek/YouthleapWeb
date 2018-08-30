@@ -2,7 +2,7 @@
     RewriteEngine on
 	RewriteRule ^css/(.+)$ resource/css/$1 [QSA,NC,L]
 	RewriteRule ^sass/(.+)$ resource/sass/$1 [QSA,NC,L]
-	RewriteRule ^font/(.+)$ resource/font/$1 [QSA,NC,L]
+	RewriteRule ^fonts/(.+)$ resource/fonts/$1 [QSA,NC,L]
 	RewriteRule ^img/(.+)$ resource/img/$1 [QSA,NC,L]
 	RewriteRule ^ico/(.+)$ resource/ico/$1 [QSA,NC,L]
 	RewriteRule ^fonts/(.+)$ resource/fonts/$1 [QSA,NC,L]

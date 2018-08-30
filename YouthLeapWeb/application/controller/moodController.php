@@ -12,32 +12,39 @@
 		{
 		}
 
-		public function index($psort=PSORT_NEWEST, $page = 0, $size = 20) {
+		public function index($event_id=null) {
 			$this->_navi_menu = "mood";
       $this->_subnavi_menu = "mood_index";
       
-      $db_options = _db_options();
+			$db_options = _db_options();
+			
+			$event = new subeventModel($db_options);
+			$events = array();
+			$err = $event->select("del_flag != 1");
+			while ($err == ERR_OK) {
+				array_push($events, clone $event);
+				$err = $event->fetch();
+			}
+
       $studentmood = new submoodModel($db_options);
       $sql = "SELECT m.*, st.first_name, st.last_name, l.displayName 
       FROM e_studentmood m 
       LEFT JOIN t_usermaster st ON st.id = m.student_id AND st.user_type = " . UTYPE_STUDENT . 
       " LEFT JOIN c_lookup l ON l.lookup_id = m.mood_id";
 
-			$this->where = "1=1";
 			switch (_utype()) {
 				case UTYPE_ADMIN:
 				break;
 				case UTYPE_SCHOOL:
 				break;
 				case UTYPE_STUDENT:
-				$this->where .= " AND m.student_id = " . _user_sub_id();
+				$this->where = "m.student_id = " . _user_sub_id();
 				break;
 			}
-			$this->psort = $psort;
       $this->loadsearch("mood_index");
       $this->counts = $studentmood->scalar("SELECT COUNT(m.id) FROM e_studentmood m ",
-      array("where" => $this->where));
-
+			array("where" => $this->where));
+			
       $this->pagebar = new pageHelper($this->counts, $page, $size, 10);
 
       $err = $studentmood->query($sql, 
@@ -52,7 +59,17 @@
         array_push($studentmoods, clone $studentmood);
         $err = $studentmood->fetch();
       }
-      $this->mStudentMoods = $studentmoods;
+			$this->mStudentMoods = $studentmoods;
+			$this->mEvents = $events;
+			if ($event_id == null) {
+				$this->mEvent = $events[0];
+			} else {
+				$event = new subeventModel($db_options);
+				$event->select("id = " . $event_id);
+				$this->mEvent = $event;
+			}
+			$this->addjs("js/bootstrap-wizard/jquery.bootstrap.wizard.min.js");
+			$this->addjs("js/canvasjs/canvasjs.min.js");
 		}
 
 		public function edit() {
@@ -75,17 +92,12 @@
 			$this->addjs("js/bootstrap-wizard/jquery.bootstrap.wizard.min.js");
 		}
 
-		public function get_moodlist_ajax() {
-			$param_names = array("user_id", "psort", "page", "size", "user_token");
+		public function get_mood_statics_ajax() {
+			$param_names = array("user_id", "event_id", "user_token", "mood_date", "by_date");
 			$this->set_api_params($param_names);
-			$this->check_required(array("user_id", "user_token"));
+			$this->check_required(array("user_id", "event_id", "user_token", "by_date"));
 			$params = $this->api_params;
 			$this->start();
-
-			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
-			$page = $params->page == null ? 0 : $params->page;
-			$size = $params->size == null ? 10 : $params->size;
-
 			if (_school() == false) {
 				$this->finish(null, ERR_NODATA);
 				return;
@@ -95,7 +107,25 @@
 			$studentmood = new submoodModel($db_options);
       $sql = "SELECT m.* FROM e_studentmood m ";
 
-			$this->where = "1=1";
+			$event = new subeventModel($db_options);
+			$err = $event->select("id = " . $params->event_id);
+			if ($err != ERR_OK) {
+				$this->finish(null, $err);
+			}
+						
+			$results = array();
+			if (!$params->by_date == true) {
+				$results = array("mad"=>0, "sad"=>0, "clam"=>0, "brave"=>0);
+			} else {
+				$current = strtotime( $event->from_date );
+				$last = strtotime( $event->to_date );
+	
+				while( $current <= $last ) {
+					$results[date('Y-m-d', $current)] = array("mad"=>0, "sad"=>0, "clam"=>0, "brave"=>0);
+					$current = strtotime( '+1 day', $current );
+				}
+			}
+			$this->where = "m.del_flag != 1 AND m.event_id =" . $params->event_id;
 			switch (_utype()) {
 				case UTYPE_ADMIN:
 				break;
@@ -107,17 +137,83 @@
 				case UTYPE_PARENT:				
 				break;
 			}
-			$this->psort = $psort;
-      $this->loadsearch("mood_index");
-      $this->counts = $studentmood->scalar("SELECT COUNT(m.id) FROM e_studentmood m ",
-			array("where" => $this->where));
-
       $err = $studentmood->query($sql, 
       array(
-        "where" => $this->where,
-        "limit" => $size,
-      "limit" => $size,
-      "offset" => $page * $size));
+        "where" => $this->where));
+			if ($err != ERR_OK) {
+				$this->finish(null, $err);
+			}
+      while($err == ERR_OK) {
+				if ($params->by_date == true) {
+					$statics = $results[$studentmood->mood_date];
+					$feeling = $this->mood_color_feeling($studentmood->color);
+					$statics[$feeling]++;
+					$results[$studentmood->mood_date] = $statics;					
+				} else {
+					$feeling = $this->mood_color_feeling($studentmood->color);
+					$results[$feeling]++;
+				}
+
+				$err = $studentmood->fetch();
+			}
+			$this->finish(array("results"=>$results), ERR_OK);
+		}
+
+		public function mood_color_feeling($color) {
+			$mood_colors = _mood_colors();
+			for ($i = 0; $i < 10; $i++) {
+				for ($j = 0; $j < 10; $j++) {
+					if ($mood_colors[$i][$j] == $color) {
+						if ($i < 5 && $j < 5) {
+							return "mad";
+						}
+						else if ($i < 5 && $j >= 5) {
+							return "brave";
+						}
+						else if ($i >= 5 && $j < 5) {
+							return "sad";
+						}
+						else if ($i >= 5 && $j >= 5) {
+							return "clam";
+						}
+						return "";
+					}
+				}
+			}
+		}
+
+		public function get_moodlist_ajax() {
+			$param_names = array("user_id", "event_id", "mood_date", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_id", "event_id", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				return;
+			}
+
+			$db_options = _db_options();
+			$studentmood = new submoodModel($db_options);
+      $sql = "SELECT m.* FROM e_studentmood m ";
+
+			$this->where = "m.del_flag != 1 AND m.event_id =" . $params->event_id . " AND m.mood_date = " . _sql($params->mood_date); 
+			switch (_utype()) {
+				case UTYPE_ADMIN:
+				break;
+				case UTYPE_SCHOOL:
+				break;
+				case UTYPE_STUDENT:
+				$this->where .= " AND m.student_id = " . $params->user_id;
+				break;
+				case UTYPE_PARENT:				
+				break;
+			}
+      $err = $studentmood->query($sql, 
+      array(
+				"where" => $this->where,
+				"order" => "m.mood_date desc"));
 
 			$studentmoods = array();
 			if ($err != ERR_OK) {
@@ -130,18 +226,24 @@
 				$lookup = new sublookupModel($db_options);
 				$lookup->select("lookup_id = " . $studentmood->mood_id);
 				$mood_image = _mood_url($lookup->displayName);
-				array_push($studentmoods, array("mood"=>array_merge($studentmood->props(), array("mood_image"=>$mood_image)), "student"=>$student->props()));
+				$font_color = getMoodFontColor($studentmood->color);
+				array_push($studentmoods, array("mood"=>array_merge($studentmood->props(), array("mood_image"=>$mood_image, "font_color"=>$font_color)), "student"=>$student->props()));
         $err = $studentmood->fetch();
 			}
 			$this->finish(array("moods"=>$studentmoods), ERR_OK);
 		}
 
 		public function save_ajax() {
-			$param_names = array("id", "mood_id", "color_name", "event_id");
+			$param_names = array("id", "mood_id", "color_name", "event_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("mood_id", "color_name", "event_id"));
+			$this->check_required(array("mood_id", "color_name", "event_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
+
+			if (_school() == false) {
+				$this->finish(null, ERR_NODATA);
+				return;
+			}
 
 			$db_options = _db_options();
 			$mood = new submoodModel($db_options);
@@ -151,6 +253,7 @@
 			$mood->student_id = _user_sub_id();
 			$mood->mood_id = $params->mood_id;
 			$mood->color = $params->color_name;
+			$mood->event_id = $params->event_id;
 			$mood->mood_date = _datetime();
 			$this->check_error($err = $mood->save());
 			$this->finish(null, $err);

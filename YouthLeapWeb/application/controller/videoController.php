@@ -17,7 +17,7 @@
 					parent::check_priv($action, UTYPE_TUTOR);
 					break;
 				default:
-					parent::check_priv($action, UTYPE_TUTOR);
+					parent::check_priv($action, UTYPE_NONE);
 					break;
 			}
 		}

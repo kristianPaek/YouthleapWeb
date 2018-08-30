@@ -63,6 +63,9 @@
 					}
 				}
 				$tutor->class_name = $class_name;
+				if (!is_url_exist($tutor->user_image)) {
+					$tutor->user_image = null;
+				}
 				$tutors[] = clone $tutor;
 				$err = $tutor->fetch();
 			}

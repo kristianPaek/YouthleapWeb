@@ -41,7 +41,10 @@
 					"limit" => $size,
 					"offset" => $this->pagebar->page * $size));
 
-			while ($err == ERR_OK) {
+			while ($err == ERR_OK) {				
+				if (!is_url_exist($parent->user_image)) {
+					$parent->user_image = null;
+				}
 				$parents[] = clone $parent;
 				$err = $parent->fetch();
 			}

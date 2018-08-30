@@ -3,6 +3,7 @@
 	<form id="form" action="api/mood/save" class="form-horizontal" method="post">
 		<?php $mMood->hidden("id");?>
 		<?php $mMood->hidden("mood_id");?>
+		<input type="hidden" id="user_token" name="user_token" value="<?php p(_token());?>" />
 		<input type="hidden" id="color_name" name="color_name" val="" />
 		<div class="form-wizard">
 			<div class="form-body">
@@ -49,26 +50,61 @@
 							<img src="" id="select_image">
 						</div>
 						<div class="form-group">
-							<label for="event_id"> Event </label>              
+							<label for="event_id"> Event </label>
 							<?php $mMood->select_model("event_id", new subeventModel(_db_options()), "id", "event_name"); ?>
 						</div>
 					</div>
 					<div class="tab-pane" id="step3">
 						<div class="alert alert-warning">
-							Plase choose color.
+							How are you feeling?
 						</div>
+						<table style="margin:auto;">
+							<?php
+							$mood_colors = _mood_colors();
+							for ($i = 0; $i < 10; $i ++) { ?>
+								<tr>
+									<?php if ($i==0) { ?>
+										<td rowspan=10>
+											<div class="text-right">High</div>
+											<div style="font-size:20px; margin:175px 0;">Energy</div>
+											<div class="text-right">Low</div>
+										</td>											
+									<?php } ?>
+								<?php for ($j =0; $j<10; $j++) { ?>
+									<td>
+										<a class="btn btn-default btn-color" color_name="<?php p($mood_colors[$i][$j]);?>" style="min-width:40px; min-height:40px; background-color:<?php p($mood_colors[$i][$j]);?>;">
+											<i class="ln-icon-check"></i>
+										</a>
+									</td>
+								<?php } ?>
+								</tr>
+							<?php } ?>
+							<tr>
+								<td>
+								</td>
+								<td colspan=10>
+									<div class="row">
+										<div class="col-md-3 text-left">Unpleasaunt</div>
+										<div class="col-md-6 text-center" style="font-size: 20px;">Feeling</div>
+										<div class="col-md-3 text-right">Pleasaunt</div>
+									</div>
+								<td>
+							</tr>
+						</table>
 						<div>
-						<ul class="mood-list">
-							<?php foreach($mMoodColors as $color) { ?>
+						<!-- <ul class="mood-color-list">
+							<?php for ($i = 0; $i < 10; $i ++) { 
+								for ($j =0; $j<10; $j++) { ?>
 							<li>
-								<a class="color-img" color_name="<?php p($color); ?>">
-									<div class="foo <?php p($color);?>">
+								<a class="color-img" color_name="red">
+									<div class="foo red">
 										<i class="ln-icon-check"></i>
 									</div>
 								</a>
 							</li>
+								<?php } ?>
 							<?php } ?>
-						</ul>
+						</ul> -->
 						</div>
 					<div>
 				</div>

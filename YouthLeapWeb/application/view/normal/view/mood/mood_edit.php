@@ -53,6 +53,10 @@
 							<label for="event_id"> Event </label>
 							<?php $mMood->select_model("event_id", new subeventModel(_db_options()), "id", "event_name"); ?>
 						</div>
+						<div class="form-group">
+							<label for="event_id"> Mood Date </label>
+							<?php $mMood->datebox("mood_date"); ?>
+						</div>
 					</div>
 					<div class="tab-pane" id="step3">
 						<div class="alert alert-warning">

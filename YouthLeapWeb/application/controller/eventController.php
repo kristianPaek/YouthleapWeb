@@ -35,7 +35,7 @@
       array(
         "where" => $this->where,
         "limit" => $size,
-      "limit" => $size,
+      "order" => "class_id asc, subject_id asc",
       "offset" => $this->pagebar->page * $size));
 
       $events = array();

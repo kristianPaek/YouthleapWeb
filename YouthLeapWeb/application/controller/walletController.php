@@ -30,6 +30,12 @@
 
       $this->counts = $wallet->scalar("SELECT COUNT(w.wallet_id) " . $from,
 				array("where" => $this->where));
+			
+			switch(_utype()) {
+				case UTYPE_STUDENT:
+				$this->where .= " AND w.user_id =" . _user_sub_id();
+				break;
+			}
 
 			$this->pagebar = new pageHelper($this->counts, $page, $size, 10);
 

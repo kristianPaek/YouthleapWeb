@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "51310216302",
+    "firebase_url": "https://youthleap-a1d68.firebaseio.com",
+    "project_id": "youthleap-a1d68",
+    "storage_bucket": "youthleap-a1d68.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:51310216302:android:7eea7f24ffbefbb7",
+        "android_client_info": {
+          "package_name": "com.tech.oscar.youthleap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "51310216302-f2tu6e6ehkfqbg6g2hr43arpair4bihp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tech.oscar.youthleap",
+            "certificate_hash": "40e6fc22729d18825ddabbb50cbc3fc9aa333d67"
+          }
+        },
+        {
+          "client_id": "51310216302-0jkmi367mlkog0hspqvbcj5j9sqcpscf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRsIccIld-nEnoP4nskPSfsu0HnIPr7Y4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "51310216302-0jkmi367mlkog0hspqvbcj5j9sqcpscf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

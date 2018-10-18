@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_normal"
+    android:background="@color/blue"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_small">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.tech.oscar.youthleap.ui.view.MyAvatarImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginRight="@dimen/margin_normal" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/gender_male"
+                android:gravity="center_vertical"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/small_time"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_small" />
+
+            <TextView
+                android:id="@+id/txt_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/small_phone"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_small" />
+
+            <TextView
+                android:id="@+id/txt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/small_email"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_small" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/small_location"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_small" />
+
+    <com.tech.oscar.youthleap.ui.view.TagView
+        android:id="@+id/tag_class"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:src="@drawable/ic_action_edit_white" />
+
+        <ImageView
+            android:id="@+id/img_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:src="@drawable/ic_action_lock" />
+
+        <ImageView
+            android:id="@+id/img_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_delete" />
+    </LinearLayout>
+</LinearLayout>

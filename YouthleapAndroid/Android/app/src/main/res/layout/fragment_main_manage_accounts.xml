@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large">
+
+                <com.tech.oscar.youthleap.ui.view.SquareButton
+                    android:id="@+id/btn_tutor"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_blue"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_large">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/large_tutor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="@string/All_tutors"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textsize_large" />
+                </com.tech.oscar.youthleap.ui.view.SquareButton>
+
+                <com.tech.oscar.youthleap.ui.view.SquareButton
+                    android:id="@+id/btn_student"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_blue"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_large">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/large_student" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="@string/All_students"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textsize_large" />
+                </com.tech.oscar.youthleap.ui.view.SquareButton>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.tech.oscar.youthleap.ui.view.SquareButton
+                    android:id="@+id/btn_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/margin_large"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_blue"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_large">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/large_parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="@string/All_parents"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textsize_large" />
+                </com.tech.oscar.youthleap.ui.view.SquareButton>
+
+                <com.tech.oscar.youthleap.ui.view.SquareButton
+                    android:id="@+id/btn_attendance"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_btn_blue"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/margin_large">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/large_attendance" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_normal"
+                        android:text="@string/Attendance"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textsize_large" />
+                </com.tech.oscar.youthleap.ui.view.SquareButton>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:alpha="0.2"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/splash_logo" />
+    </RelativeLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways" />
+    </android.support.design.widget.AppBarLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
+
+

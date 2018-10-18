@@ -1,0 +1,297 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:slidemenu="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/slide_left_width"
+    android:layout_height="match_parent"
+    android:background="@color/drawer_background"
+    android:orientation="vertical"
+    slidemenu:layout_role="primaryMenu"
+    tools:ignore="RtlHardcoded,RtlSymmetry">
+
+    <LinearLayout
+        android:id="@+id/layout_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_large">
+
+        <com.tech.oscar.youthleap.ui.view.MyAvatarImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="@dimen/image_normal"
+            android:layout_height="@dimen/image_normal" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_full_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_extra_large"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/textsize_normal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txt_school"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:background="@drawable/bg_round_white"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:paddingTop="@dimen/margin_extra_small"
+                    android:paddingRight="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_extra_small"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/textsize_normal" />
+
+                <TextView
+                    android:id="@+id/txt_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_round_green"
+                    android:paddingLeft="@dimen/margin_normal"
+                    android:paddingTop="@dimen/margin_extra_small"
+                    android:paddingRight="@dimen/margin_normal"
+                    android:paddingBottom="@dimen/margin_extra_small"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menu_manage_account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/drawer_item_selected_background"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_home" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_manage_account"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_manage_account"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_wallet" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_ewallet"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_video" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_tutorial_video"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_video"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_store" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_online_store"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_store"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_mood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_mood" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_mood"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_mood"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_attendance" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_attendance"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line_attendance"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+            <LinearLayout
+                android:id="@+id/menu_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_normal">
+
+                <ImageView
+                    android:layout_width="@dimen/image_small"
+                    android:layout_height="@dimen/image_small"
+                    android:layout_marginRight="@dimen/margin_normal"
+                    android:padding="@dimen/margin_normal"
+                    android:src="@drawable/menu_logout" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/menu_logout"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/textsize_normal" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/drawer_item_selected_background" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

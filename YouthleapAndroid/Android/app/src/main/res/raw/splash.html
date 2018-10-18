@@ -1,0 +1,24 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<META http-equiv="Content-Type" CONTENT="text/html; charset=utf-8">
+<body style='text-align:justify;word-break: break-all;color:#804409;overflow:auto;'>
+	<div style="width:100%;height:100%;background-color: rgb(27,30,36);">
+		<img id="img_logo" src="big_logo.png" style="position: absolute;left: 0;right: 0;top: 0;bottom: 0;margin: auto; display: none";/>
+		<center>
+			<img id="img_l" src="l.png" style="position: absolute;top: 50%;left: 50%;margin-top: -215px;margin-left: -153px;width: 320px;"/>
+			<img id="img_y" src="y.png" style="position: absolute;top: 50%;left: 50%;margin-top: -225px;margin-left: -156px;width: 330px;"/>
+		</center>
+	</div>
+</body>
+</html>
+<script>
+	$(document).ready(function() {
+		$("#img_y").animate({width: '140px',marginTop:'-107px', marginLeft:'-52px'}, 2000);
+		$("#img_l").animate({width: '140px',marginTop:'-107px', marginLeft:'-47px'}, 2000, function() {
+			$("#img_y").animate({left: '186px'}, 3000, function() {
+				$("#img_logo").fadeIn(2000);
+			});
+		});
+		
+	});
+</script>

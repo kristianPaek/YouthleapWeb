@@ -1,0 +1,132 @@
+<resources>
+    <string name="app_name">YouthLeap</string>
+
+    <string name="Add">Add</string>
+    <string name="Add_student">Add student</string>
+    <string name="Add_parent">Add parent</string>
+    <string name="Add_tutor">Add tutor</string>
+    <string name="Address">Address</string>
+    <string name="All_categories">All categories</string>
+    <string name="All_parents">All parents</string>
+    <string name="All_products">All products</string>
+    <string name="All_product_categories">All product categories</string>
+    <string name="All_tutors">All tutors</string>
+    <string name="All_students">All students</string>
+    <string name="Attendance">Attendance</string>
+    <string name="Back">Back</string>
+    <string name="CAMERA">CAMERA</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Category_name">Category name</string>
+    <string name="Change_Password">Change Password</string>
+    <string name="City">City</string>
+    <string name="Confirm_password">Confirm password</string>
+    <string name="date_birth">Date of birth</string>
+    <string name="dialog_choose_photo">Choose Photo</string>
+    <string name="dialog_active">Do you want to active?</string>
+    <string name="dialog_deactive">Do you want to deactive?</string>
+    <string name="dialog_logout">Do you want to log out?</string>
+    <string name="dialog_remove">Do you want to remove?</string>
+    <string name="Edit">Edit</string>
+    <string name="Edit_profile">Edit profile</string>
+    <string name="Email">Email</string>
+    <string name="First_name">First name</string>
+    <string name="forget_password">Would you like to reset your password? A link will be sent to your email address. Click on the link in the email to initiate a password change request.</string>
+    <string name="GALLERY">GALLERY</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_male">Male</string>
+    <string name="hint_about">Write something about you...</string>
+    <string name="invalid_address_empty">Please input address</string>
+    <string name="invalid_category_name_empty">Please input category name</string>
+    <string name="invalid_city_empty">Please input city</string>
+    <string name="invalid_email">Please input vaild Email address</string>
+    <string name="invalid_email_empty">Please input Email address</string>
+    <string name="invalid_first_name_empty">Please input first name</string>
+    <string name="invalid_last_name_empty">Please input last name</string>
+    <string name="invalid_middle_name_empty">Please input middle name</string>
+    <string name="invalid_mobile_empty">Please input mobile number</string>
+    <string name="invalid_new_password_empty">Please input new password</string>
+    <string name="invalid_old_password_empty">Please input old password</string>
+    <string name="invalid_password_empty">Please input password</string>
+    <string name="invalid_password_not_match">2 passwords not match</string>
+    <string name="invalid_schoolname_empty">Please input school name</string>
+    <string name="invalid_state_empty">Please input state</string>
+    <string name="invalid_userid_empty">Please input user name</string>
+    <string name="menu_manage_account">Manage Accounts</string>
+    <string name="menu_ewallet">E-Wallet</string>
+    <string name="menu_tutorial_video">Tutorial video</string>
+    <string name="menu_online_store">Online Store</string>
+    <string name="menu_mood">Mood Meter</string>
+    <string name="menu_attendance">Attendance</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="Last_name">Last name</string>
+    <string name="Middle_name">Middle name</string>
+    <string name="Mobile">Mobile</string>
+    <string name="New_password">New password</string>
+    <string name="Old_password">Old password</string>
+    <string name="Password">Password</string>
+    <string name="remember_me">remember me</string>
+    <string name="Removed">Removed</string>
+    <string name="Reset">Reset</string>
+    <string name="Saved">Saved</string>
+    <string name="State">State</string>
+    <string name="School_name">School name</string>
+    <string name="Tutor">Tutor</string>
+    <string name="user_type_admin">Super Administrator</string>
+    <string name="user_type_school">School Admin</string>
+    <string name="user_type_tutor">@string/Tutor</string>
+    <string name="user_type_parent">Parent</string>
+    <string name="user_type_student">Student</string>
+    <string name="unknown">unknown</string>
+    <string name="User_name">User name</string>
+
+    <!-- fingerprint -->
+    <string name="txt_fingerplace">Please press finger &#8230;</string>
+    <string name="txt_fpbegin">Begin to Identify</string>
+    <string name="txt_fpplace">Please press finger</string>
+    <string name="txt_fplift">Please lift finger</string>
+    <string name="txt_fpdisplay">Display fingerprint image &#8230;</string>
+    <string name="txt_fpprocess">Start processing &#8230;</string>
+    <string name="txt_fpidentify">Being Identify &#8230;</string>
+    <string name="txt_fpfail">Failed to generate!</string>
+    <string name="txt_fpmatchok">Match OK!</string>
+    <string name="txt_fpmatchfail">Match Fail!</string>
+    <string name="txt_fpenrolok">Enrol OK</string>
+    <string name="txt_fpenrolfail">Enrol Fail</string>
+    <string name="txt_fpduplicate">Fail,Duplicate Enroll!</string>
+    <string name="txt_cardmatch">Card Match Success</string>
+    <string name="txt_cardsn">Card SN:</string>
+    <string name="txt_fpmatching">Matching &#8230;</string>
+    <string name="txt_snerror">SN Error</string>
+    <string name="txt_fpclick">Click the fingerprint icon to begin</string>
+    <string name="txt_enrolinfo1">Not Enroll User</string>
+    <string name="txt_enrolinfo2">Please Enroll User</string>
+    <string name="txt_exitinfo">Press again to exit</string>
+
+
+    <!-- Common -->
+    <string name="Error">Error</string>
+    <string name="NO">NO</string>
+    <string name="OK">OK</string>
+    <string name="Success">Success</string>
+    <string name="Warning">Warning</string>
+    <string name="YES">YES</string>
+
+    <!-- Message -->
+    <string name="msg_alert_on_back_pressed">Press Back Button once more to exit</string>
+    <string name="msg_error_network">No network connection!</string>
+
+    <!-- Time -->
+    <string name="checkin_time_minus">Just now</string>
+    <string name="checkin_time_second_ago">%1$d second ago</string>
+    <string name="checkin_time_seconds_ago">%1$d seconds ago</string>
+    <string name="checkin_time_minute_ago">%1$d minute ago</string>
+    <string name="checkin_time_minutes_ago">%1$d minutes ago</string>
+    <string name="checkin_time_hour_ago">%1$d hour ago</string>
+    <string name="checkin_time_hours_ago">%1$d hours ago</string>
+    <string name="checkin_time_day_ago">%1$d day ago</string>
+    <string name="checkin_time_days_ago">%1$d days ago</string>
+    <string name="checkin_time_week_ago">%1$d week ago</string>
+    <string name="checkin_time_weeks_ago">%1$d weeks ago</string>
+    <string name="checkin_time_month_ago">%1$d month ago</string>
+    <string name="checkin_time_months_ago">%1$d months ago</string>
+</resources>

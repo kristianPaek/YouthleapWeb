@@ -18,7 +18,7 @@
           "semester_code" => "varchar",
           "semester" => "varchar",
           "is_active" => "int"
-				),
+				)
       );
 		}
   }

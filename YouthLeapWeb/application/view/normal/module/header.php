@@ -131,6 +131,15 @@
 							<li class="<?php $this->set_sub_active('parent'); ?>"><a href="parent/index">Parent List</a></li>
 						</ul>
 					</li>
+					<li class="dropdown <?php $this->set_active('gradebook'); ?>" title="<?php p("Gradebook"); ?>">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<span><?php p("Assignment & Gradebook"); ?></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="<?php $this->set_sub_active('grade_assignment'); ?>"><a href="grade/assignment">Assignment</a></li>
+							<!-- <li class="<?php $this->set_sub_active('grade_book'); ?>"><a href="grade/book">Gradebook</a></li> -->
+						</ul>
+					</li>
 					<li class="dropdown <?php $this->set_active('wallet'); ?>" title="<?php p("E-Wallet"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
 							<span><?php p("E-Wallet"); ?></span>
@@ -163,6 +172,9 @@
 						<ul class="dropdown-menu">
 							<li><a href="event/index">Event List</a></li>
 						</ul>
+						<ul class="dropdown-menu">
+							<li><a href="attendance/report">Attendance Report</a></li>
+						</ul>
 					</li>
 					<li class="dropdown <?php $this->set_active('master'); ?>" title="<?php p("Master Details"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
@@ -190,22 +202,15 @@
 				</ul>
 			<?php } else if ($utype == UTYPE_TUTOR) { ?>
 				<ul>
-					<!-- <li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("My Assignment"); ?>">
+					<li class="dropdown <?php $this->set_active('gradebook'); ?>" title="<?php p("Gradebook"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
-							<span><?php p("Assignment"); ?></span>
+							<span><?php p("Assignment & Gradebook"); ?></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="profile/password">Assignment List</a></li>
+							<li class="<?php $this->set_sub_active('grade_assignment'); ?>"><a href="grade/assignment">Assignment</a></li>
+							<!-- <li class="<?php $this->set_sub_active('grade_book'); ?>"><a href="grade/book">Gradebook</a></li> -->
 						</ul>
-					</li> -->
-					<!-- <li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("Gradebook"); ?>">
-						<a class="dropdown-toggle" data-toggle="dropdown">
-							<span><?php p("Gradebook"); ?></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="profile/password">Gradebook List</a></li>
-						</ul>
-					</li> -->
+					</li>
 					<li class="dropdown <?php $this->set_active('video'); ?>" title="<?php p("Upload Video"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
 							<span><?php p("Upload Video"); ?></span>
@@ -239,22 +244,22 @@
 				</ul>
 			<?php } else if ($utype == UTYPE_STUDENT) { ?>
 				<ul>
-					<!-- <li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("My Assignment"); ?>">
+					<li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("My Assignment"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
 							<span><?php p("Assignment"); ?></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="profile/password">Assignment List</a></li>
 						</ul>
-					</li> -->
-					<!-- <li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("Grade"); ?>">
+					</li>
+					<li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("Grade"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
 							<span><?php p("Grade"); ?></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li><a href="profile/password">Grade View</a></li>
 						</ul>
-					</li> -->
+					</li>
 					<li class="dropdown <?php $this->set_active('blog'); ?>" title="<?php p("E-Wallet"); ?>">
 						<a class="dropdown-toggle" data-toggle="dropdown">
 							<span><?php p("E-Wallet"); ?></span>

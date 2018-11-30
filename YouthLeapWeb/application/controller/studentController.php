@@ -71,7 +71,7 @@
 		}
 
 		public function get_students_ajax() {
-			$param_names = array("class_id", "psort", "page", "size", "user_token");
+			$param_names = array("class_id", "student_name", "psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("user_token"));
 			$params = $this->api_params;
@@ -97,6 +97,10 @@
 			$this->where = "p.del_flag=0 AND p.user_type = " . UTYPE_STUDENT;
 			if ($class_id > 1) {
 				$this->where .= " AND c.class_path LIKE " . _sql($class->class_path . "%");
+			}
+			if ($params->student_name != "") {
+				$this->where .= " AND p.first_name LIKE " . _sql("%" . $params->student_name . "%") . " OR p.middle_name LIKE " . _sql("%" . $params->student_name . "%")
+				 . " OR p.last_name LIKE " . _sql("%" . $params->student_name. "%");
 			}
 
 			$this->loadsearch("student_list");

@@ -20,7 +20,6 @@
 			$this->_navi_menu = "master";
       $this->_subnavi_menu = "configuration";
 			$db_options = _db_options();
-
 			$grades = array();
       $class = new subclassModel($db_options);
       $this->where = "depth = 2";

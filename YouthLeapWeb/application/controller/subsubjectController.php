@@ -174,4 +174,24 @@
 
 			return "popup/";
 		}
+		
+		public function get_subjectlist_ajax() {
+			$param_names = array("user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			$db_options = _db_options();
+
+			$sql = "Select * from mt_subject WHERE is_active = 1";
+			$subject = new subsubjectModel(_db_options());
+			$err = $subject->query($sql);
+			$subjectlist = array();
+			while ($err == ERR_OK) {
+				array_push($subjectlist, array("subject_id"=>$subject->id, "subject_name"=>$subject->subject_name));
+				$err = $subject->fetch();
+			}			
+			$this->finish(array("subjectlist"=>$subjectlist), ERR_OK);
+		}
 	}

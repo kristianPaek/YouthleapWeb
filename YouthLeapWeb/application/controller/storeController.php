@@ -173,9 +173,9 @@
     }
 
     public function get_products_ajax() {
-      $param_names = array("psort", "page", "size");
+      $param_names = array("psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
@@ -203,7 +203,7 @@
 					"offset" => $this->pagebar->page * $size));
       
       while ($err == ERR_OK) {
-        $products[] = clone $product;
+        $products[] = array_merge($product->props(), array("category_name"=>$product->category_name));
         $err = $product->fetch();
       }
       $this->finish(array("products"=>$products), ERR_OK);
@@ -217,10 +217,29 @@
       $this->mProduct = $product;
     }
 
-    public function get_product_ajax() {
-      $param_names = array("product_id");
+    public function product_remove_ajax() {
+      $param_names = array("product_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array());
+			$this->check_required(array("product_id", "user_token"));
+			$params = $this->api_params;
+			$this->start();
+      
+      if (_school() == false) {
+        $this->finish(null, ERR_NODATA);
+      }
+			$db_options = _db_options();
+			$product = new subproductModel($db_options);
+			$err = $product->select("id = " . $params->product_id);
+			if ($err == ERR_OK) {
+        $product->remove(true);
+			}
+			$this->finish(null, $err);
+    }
+
+    public function get_product_ajax() {
+      $param_names = array("product_id", "user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 			$product_id = $params->product_id;
@@ -233,9 +252,9 @@
     }
 
 		public function product_save_ajax() {
-			$param_names = array("id", "product_name", "short_description", "long_description", "redeem_points", "category_id");
+			$param_names = array("id", "product_name", "short_description", "long_description", "redeem_points", "category_id", "user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("product_name", "category_id"));
+			$this->check_required(array("product_name", "category_id", "user_token"));
 			$params = $this->api_params;
 			$this->start();
 
@@ -248,7 +267,7 @@
 			$product->load($params);
 
       global $_FILES;
-			if ($_FILES["user_avater"] != null) {
+			if ($_FILES["user_avatar"] != null) {
 				$avatarpath = _avatar_path("user_avatar");
 				$avatarfile = basename($avatarpath);
 

@@ -97,6 +97,10 @@
 		CODE_TRANSTYPE => array(
 			TRANS_TYPE_IN => "TRANS TYPE IN",
 			TRANS_TYPE_OUT => "TRANS TYPE OUT"
+		),
+		CODE_ASSIGN => array(
+			ASSIGN_HOMEWORK => "Homework",
+			ASSIGN_EXAM => "Exam"
 		)
 	);
 

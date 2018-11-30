@@ -47,11 +47,12 @@
 		}
 
 		public function get_event_list_ajax() {
-			$param_names = array("psort", "page", "size", "user_token");
+			$param_names = array("class_id", "psort", "page", "size", "user_token");
 			$this->set_api_params($param_names);
 			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
+
 
 			$psort = $params->psort == null ? PSORT_NEWEST : $params->psort;
 			$page = $params->page == null ? 0 : $params->page;
@@ -68,7 +69,13 @@
       LEFT JOIN mt_class c ON c.class_id = ae.class_id 
       LEFT JOIN mt_subject st ON st.id = ae.subject_id";
 
-      $this->where = "1=1";
+			$this->where = "1=1";
+			if ($params->class_id != null) {
+				$parent_class = new subclassModel($db_options);
+				$parent_class->select("class_id = " . $params->class_id);
+				$class_path = "%" . $parent_class->class_path . "%";
+				$this->where .= " AND c.class_path LIKE '" . $class_path . "'";
+			}
 			$this->psort = $psort;
       $this->loadsearch("event_index");
       $this->counts = $event->scalar("SELECT COUNT(st.id) FROM e_attendance_event st ",
@@ -78,7 +85,7 @@
 
       $err = $event->query($sql, 
       array("where" => $this->where,
-				"order" => $this->order,
+				"order" => 'c.class_name asc, ae.from_date asc',
 				"limit" => $size,
 				"offset" => $this->pagebar->page * $size));
 
@@ -88,7 +95,8 @@
 			}
       $events = array();
       while($err == ERR_OK) {
-        array_push($events, $event->props());
+				array_push($events, array("id"=>$event->id, "event_name"=>$event->event_name, "subject_id"=>$event->subject_id, "subject_name"=>$event->subject_name,
+			"class_id"=>$event->class_id, "class_name"=>$event->class_name, "from_date"=>$event->from_date, "to_date"=>$event->to_date));
         $err = $event->fetch();
 			}
 			$this->finish(array("events"=>$events), ERR_OK);
@@ -119,10 +127,10 @@
 				case PSORT_NEWEST:
 				default:
 					$this->search->sort = PSORT_NEWEST;
-					$this->order = "st.create_time DESC";
+					$this->order = "ae.event_name DESC";
 					break;
 				case PSORT_OLDEST:
-					$this->order = "st.create_time ASC";
+					$this->order = "ae.event_name ASC";
 					break;
 			}
 		}

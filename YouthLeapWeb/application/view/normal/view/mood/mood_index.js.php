@@ -118,10 +118,10 @@ function show_mood_charts(mood_datas, by_date, mood_date="")
     clams = [];
     braves = [];
     $.each(mood_datas, function( key, value ) {
-      mads.push({x: new Date(key), y: value.mad});
-      sads.push({x: new Date(key), y: value.sad});
-      clams.push({x: new Date(key), y: value.clam});
-      braves.push({x: new Date(key), y: value.brave});
+      mads.push({x: new Date(value.date), y: value.mood_data.mad});
+      sads.push({x: new Date(value.date), y: value.mood_data.sad});
+      clams.push({x: new Date(value.date), y: value.mood_data.clam});
+      braves.push({x: new Date(value.date), y: value.mood_data.brave});
     });
     var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,

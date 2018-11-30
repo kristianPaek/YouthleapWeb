@@ -6,9 +6,11 @@
 			<div class="form-group input-group input-icon left">
 					<i class="icon-magnifier"></i>
 					<?php $this->search->input("search_string", array("class" => "input-circle-left", "placeholder" => _l("Search..."), "maxlength" => "50")); ?>
-					<?php $this->search->select_psort("sort", "wallet/index"); ?>
+					<?php $this->search->select_psort("sort", "event/index"); ?>
 			</div>
+			<?php if (_utype() == UTYPE_ADMIN) { ?>
 			<a class="btn btn-default" href="event/edit"><i class="icon-plus"></i> Add Event</a>
+			<?php } ?>
 		</form>
 		<h1><?php p($this->title); ?></h1>
 		<div class="product-list">

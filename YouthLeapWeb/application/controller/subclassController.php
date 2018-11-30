@@ -43,15 +43,37 @@
 		}
 		
 		public function get_classlist_ajax() {
-			$param_names = array("parent_id");
+			$param_names = array("user_token");
 			$this->set_api_params($param_names);
-			$this->check_required(array("parent_id"));
+			$this->check_required(array("user_token"));
 			$params = $this->api_params;
 			$this->start();
 
 			$db_options = _db_options();
-			$classlist = subclassModel::children($params->parent_id);
-			$this->finish(array("classlist"=>$classlist), ERR_OK);
+
+			$sql = "Select * from mt_class c WHERE c.depth = 2 ORDER BY c.sort asc";
+			$grade = new subclassModel(_db_options());
+			$err = $grade->query($sql);
+			$classlist = array();
+			while ($err == ERR_OK) {
+				$sql = "Select * from mt_class c WHERE c.parent_id = "._sql($grade->class_id)." ORDER BY c.sort asc, c.class_name asc";
+				$classObj = new subclassModel(_db_options());
+				$err_class = $classObj->query($sql);
+				$grade_array = array();
+
+				while ($err_class == ERR_OK) {
+					array_push($grade_array, array("class_id"=>$classObj->class_id, "class_name"=>$classObj->class_name));
+					$err_class = $classObj->fetch();
+				}
+				array_push($classlist, array("grade_name"=>$grade->class_name, "grade_id"=>$grade->class_id, "classes"=>$grade_array));
+				$err = $grade->fetch();
+			}
+			
+			$sql = "Select * from mt_class c WHERE c.depth = 1 ORDER BY c.sort asc";
+			$class_all = new subclassModel(_db_options());
+			$err = $class_all->query($sql);
+
+			$this->finish(array("results"=> array("all_id"=>$class_all->class_id, "all_name"=>$class_all->class_name, "classlist"=>$classlist)), ERR_OK);
 		}
 
 		private function loadsearch($session_id) {

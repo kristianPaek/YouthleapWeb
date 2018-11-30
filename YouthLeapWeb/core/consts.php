@@ -68,6 +68,7 @@
 	define("CODE_LOOKUP",												8);
 	define("CODE_VIDEOTYPE",										9);
 	define("CODE_TRANSTYPE",										10);
+	define("CODE_ASSIGN",												11);
 
 	// User Priv
 	define('UTYPE_NONE',                        0);
@@ -121,3 +122,6 @@
 
 	define("TRANS_TYPE_IN",											-1);
 	define("TRANS_TYPE_OUT",										1);
+
+	define("ASSIGN_HOMEWORK",										0);
+	define("ASSIGN_EXAM",												1);

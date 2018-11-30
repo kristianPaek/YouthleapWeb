@@ -136,6 +136,26 @@
       }
       $this->finish(array("wallets"=>$wallets), ERR_OK);
 		}
+		
+		public function get_purposelist_ajax() {
+			$param_names = array("user_token");
+			$this->set_api_params($param_names);
+			$this->check_required(array("user_token"));
+			$params = $this->api_params;
+			$this->start();
+
+			$db_options = _db_options();
+
+			$sql = "Select * from c_lookup WHERE parent_id = " . LOOKUP_PURPOSE . " ORDER BY sort asc";
+			$lookup = new sublookupModel(_db_options());
+			$err = $lookup->query($sql);
+			$purposelist = array();
+			while ($err == ERR_OK) {
+				array_push($purposelist, array("purpose_id"=>$lookup->lookup_id, "purpose_name"=>$lookup->displayName));
+				$err = $lookup->fetch();
+			}			
+			$this->finish(array("purposelist"=>$purposelist), ERR_OK);
+		}
 
 		public function save_ajax() {
 			$param_names = array("wallet_id", "purpose_id", "points", "transaction_type_id", "transaction_date", "user_token");
